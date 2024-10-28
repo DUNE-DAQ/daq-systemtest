@@ -49,14 +49,19 @@ tde_frag_params = {
     "min_size_bytes": 7272,
     "max_size_bytes": 14472,
 }
+
+# 1ms readout window = 62512 DTS ticks
+# num frames = ro_win / tick diff = 977
+# fragment size = num frames * frame size = 461026
+
 pds_stream_frag_params = {
     "fragment_type_description": "PDSStream",
     "fragment_type": "DAPHNEStream",
     "hdf5_source_subsystem": "Detector_Readout",
     "expected_fragment_count": number_of_data_producers,
-    "min_size_bytes": 108632,
-    "max_size_bytes": 297432,
-}  # 230 x 472; 630 * 472 (+72)
+    "min_size_bytes": 72+461026-20*472,
+    "max_size_bytes": 72+461026+20*472,
+}  
 pds_frag_params = {
     "fragment_type_description": "PDS",
     "fragment_type": "DAPHNE",
