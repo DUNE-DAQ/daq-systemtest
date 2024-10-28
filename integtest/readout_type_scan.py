@@ -46,17 +46,22 @@ tde_frag_params = {
     "fragment_type": "TDEEth",
     "hdf5_source_subsystem": "Detector_Readout",
     "expected_fragment_count": number_of_data_producers,
-    "min_size_bytes": 575048,
-    "max_size_bytes": 1150024,
+    "min_size_bytes": 7272,
+    "max_size_bytes": 14472,
 }
+
+# 1ms readout window = 62512 DTS ticks
+# num frames = ro_win / tick diff = 977
+# fragment size = num frames * frame size = 461026
+
 pds_stream_frag_params = {
     "fragment_type_description": "PDSStream",
     "fragment_type": "DAPHNEStream",
     "hdf5_source_subsystem": "Detector_Readout",
     "expected_fragment_count": number_of_data_producers,
-    "min_size_bytes": 108632,
-    "max_size_bytes": 297432,
-}  # 230 x 472; 630 * 472 (+72)
+    "min_size_bytes": 72+461026-20*472,
+    "max_size_bytes": 72+461026+20*472,
+}  
 pds_frag_params = {
     "fragment_type_description": "PDS",
     "fragment_type": "DAPHNE",
@@ -128,12 +133,12 @@ conf_dict.config_substitutions.append(
     )
 )
 
-swtpg_conf = copy.deepcopy(conf_dict)
-swtpg_conf.tpg_enabled = True
-swtpg_conf.frame_file = (
+tpg_conf = copy.deepcopy(conf_dict)
+tpg_conf.tpg_enabled = True
+tpg_conf.frame_file = (
     "asset://?checksum=dd156b4895f1b06a06b6ff38e37bd798"  # WIBEth All Zeros
 )
-swtpg_conf.config_substitutions.append(
+tpg_conf.config_substitutions.append(
     data_classes.config_substitution(
         obj_class="TAMakerPrescaleAlgorithm",
         obj_id="dummy-ta-maker",
@@ -142,11 +147,12 @@ swtpg_conf.config_substitutions.append(
 )
 
 wibeth_conf = copy.deepcopy(conf_dict)
-wibeth_conf.frame_file = "asset://?label=WIBEth&subsystem=readout"
+# wibeth_conf.frame_file = "asset://?label=WIBEth&subsystem=readout"
+wibeth_conf.frame_file = "asset://?checksum=dd156b4895f1b06a06b6ff38e37bd798"
 
 tde_conf = copy.deepcopy(conf_dict)
 tde_conf.dro_map_config.det_id = 11
-tde_conf.frame_file = "asset://?checksum=dd156b4895f1b06a06b6ff38e37bd798"
+tde_conf.frame_file = "asset://?checksum=dd156b4895f1b06a06b6ff38e37bd798" # WIBEth All Zeros
 #tde_conf.frame_file = "asset://?checksum=759e5351436bead208cf4963932d6327"
 
 pds_stream_conf = copy.deepcopy(conf_dict)
@@ -189,10 +195,10 @@ pds_conf.config_substitutions.append(
 confgen_arguments = {
     # "WIB1_System": wib1_conf,
     "WIBEth_System": wibeth_conf,
-    "Software_TPG_System": swtpg_conf,
+    "TPG_System": tpg_conf,
     "PDS_Stream_System": pds_stream_conf,
-    "PDS_System": pds_conf,
-    "TDE_System": tde_conf,
+    # "PDS_System": pds_conf,
+    "TDEEth_System": tde_conf,
     # "PACMAN_System": pacman_conf,
     # "MPD_System": mpd_conf
 }
@@ -259,7 +265,7 @@ def test_data_files(run_nanorc):
             fragment_check_list.append(pds_frag_params)
         elif "WIBEth" in current_test:
             fragment_check_list.append(wibeth_frag_params)
-        elif "TDE" in current_test:
+        elif "TDEEth" in current_test:
             fragment_check_list.append(tde_frag_params)
 
     # Run some tests on the output data file
