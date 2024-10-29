@@ -87,6 +87,11 @@ conf_dict.op_env = "integtest"
 conf_dict.session = "minimal"
 conf_dict.tpg_enabled = False
 
+# For testing, allow drunc to manage ConnectivityService (default is False, integrationtest manages Connectivity Service)
+#conf_dict.drunc_connsvc = True
+# For testing, specify connectivity service port (default is 0, a random port is chosen for the Connectivity Service)
+#conf_dict.connsvc_port = 12345
+
 substitution = data_classes.config_substitution(
     obj_id="random-tc-generator",
     obj_class="RandomTCMakerConf",
