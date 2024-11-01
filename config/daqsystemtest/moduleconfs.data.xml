@@ -530,10 +530,12 @@
 
 <obj class="TCMakerADCSimpleWindowAlgorithm" id="tc-adcwindow-algo">
  <attr name="prescale" type="u32" val="100"/>
+ <attr name="tc_type_name" type="string" val="kADCSimpleWindow">
 </obj>
 
 <obj class="TCMakerPrescaleAlgorithm" id="tc-pass-through-algo">
  <attr name="prescale" type="u32" val="100"/>
+ <attr name="tc_type_name" type="string" val="kPrescale">
 </obj>
 
 <obj class="TCReadoutMap" id="def-hsi-tc-map">
