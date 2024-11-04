@@ -100,7 +100,7 @@ while [[ ${overall_loop_count} -lt ${overall_run_count} ]]; do
         elif [[ -e "${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME}" ]]; then
           pytest -s ${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         else
-          pytest -s ${DAQSYSTEMTEST_SHARE}/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
+          pytest -s -p no:cacheprovider ${DAQSYSTEMTEST_SHARE}/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         fi
         let pytest_return_code=${PIPESTATUS[0]}
 
