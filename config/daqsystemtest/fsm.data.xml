@@ -73,67 +73,26 @@
  <comment creation-time="20240208T094131" created-by="eflumerf" created-on="ironvirt9.mshome.net" author="eflumerf" text="reformat"/>
 </comments>
 
-
-<obj class="FSMCommand" id="conf">
- <attr name="cmd" type="string" val="conf"/>
- <attr name="optional" type="bool" val="1"/>
-</obj>
-
-<obj class="FSMCommand" id="disable_triggers">
- <attr name="cmd" type="string" val="disable_triggers"/>
- <attr name="optional" type="bool" val="1"/>
-</obj>
-
-<obj class="FSMCommand" id="drain_dataflow">
- <attr name="cmd" type="string" val="drain_dataflow"/>
- <attr name="optional" type="bool" val="0"/>
-</obj>
-
-<obj class="FSMCommand" id="enable_triggers">
- <attr name="cmd" type="string" val="enable_triggers"/>
- <attr name="optional" type="bool" val="0"/>
-</obj>
-
-<obj class="FSMCommand" id="scrap">
- <attr name="cmd" type="string" val="scrap"/>
- <attr name="optional" type="bool" val="1"/>
-</obj>
-
-<obj class="FSMCommand" id="start">
- <attr name="cmd" type="string" val="start"/>
- <attr name="optional" type="bool" val="0"/>
-</obj>
-
-<obj class="FSMCommand" id="stop">
- <attr name="cmd" type="string" val="stop"/>
- <attr name="optional" type="bool" val="0"/>
-</obj>
-
-<obj class="FSMCommand" id="stop_trigger_sources">
- <attr name="cmd" type="string" val="stop_trigger_sources"/>
- <attr name="optional" type="bool" val="0"/>
-</obj>
-
-<obj class="FSMaction" id="db-run-registry">
+<obj class="RCApplicationAction" id="db-run-registry">
  <attr name="name" type="string" val="db-run-registry"/>
 </obj>
 
-<obj class="FSMaction" id="elisa-logbook">
+<obj class="RCApplicationAction" id="elisa-logbook">
  <attr name="name" type="string" val="elisa-logbook"/>
 </obj>
 
-<obj class="FSMaction" id="file-logbook">
+<obj class="RCApplicationAction" id="file-logbook">
  <attr name="name" type="string" val="file-logbook"/>
  <rel name="parameters">
   <ref class="Variable" id="file-logbook-file-name"/>
  </rel>
 </obj>
 
-<obj class="FSMaction" id="file-run-registry">
+<obj class="RCApplicationAction" id="file-run-registry">
  <attr name="name" type="string" val="file-run-registry"/>
 </obj>
 
-<obj class="FSMaction" id="thread-pinning">
+<obj class="RCApplicationAction" id="thread-pinning">
  <attr name="name" type="string" val="thread-pinning"/>
  <rel name="parameters">
   <ref class="Variable" id="thread-pinning-file-pre-conf"/>
@@ -143,19 +102,19 @@
  </rel>
 </obj>
 
-<obj class="FSMaction" id="trigger-rate-specifier">
+<obj class="RCApplicationAction" id="trigger-rate-specifier">
  <attr name="name" type="string" val="trigger-rate-specifier"/>
 </obj>
 
-<obj class="FSMaction" id="user-provided-run-number">
+<obj class="RCApplicationAction" id="user-provided-run-number">
  <attr name="name" type="string" val="user-provided-run-number"/>
 </obj>
 
-<obj class="FSMaction" id="usvc-provided-run-number">
+<obj class="RCApplicationAction" id="usvc-provided-run-number">
  <attr name="name" type="string" val="usvc-provided-run-number"/>
 </obj>
 
-<obj class="FSMconfiguration" id="FSMconfiguration_noAction">
+<obj class="FSM" id="FSMconfiguration_noAction">
  <attr name="states" type="string">
   <data val="initial"/>
   <data val="configured"/>
@@ -185,7 +144,7 @@
  </rel>
 </obj>
 
-<obj class="FSMconfiguration" id="fsmConf-prod">
+<obj class="FSM" id="fsmConf-prod">
  <attr name="states" type="string">
   <data val="initial"/>
   <data val="configured"/>
@@ -212,25 +171,10 @@
   <ref class="FSMsequence" id="shutdown"/>
   <ref class="FSMsequence" id="start_run"/>
   <ref class="FSMsequence" id="stop_run"/>
- </rel>
- <rel name="pre_transitions">
-  <ref class="FSMxTransition" id="pre_change_rate"/>
-  <ref class="FSMxTransition" id="pre_start_prod"/>
- </rel>
- <rel name="post_transitions">
-  <ref class="FSMxTransition" id="post_start_prod"/>
-  <ref class="FSMxTransition" id="post_drain_dataflow_prod"/>
- </rel>
- <rel name="actions">
-  <ref class="FSMaction" id="usvc-provided-run-number"/>
-  <ref class="FSMaction" id="trigger-rate-specifier"/>
-  <ref class="FSMaction" id="file-logbook"/>
-  <ref class="FSMaction" id="elisa-logbook"/>
-  <ref class="FSMaction" id="db-run-registry"/>
  </rel>
 </obj>
 
-<obj class="FSMconfiguration" id="fsmConf-test">
+<obj class="FSM" id="fsmConf-test">
  <attr name="states" type="string">
   <data val="initial"/>
   <data val="configured"/>
@@ -257,30 +201,16 @@
   <ref class="FSMsequence" id="shutdown"/>
   <ref class="FSMsequence" id="start_run"/>
   <ref class="FSMsequence" id="stop_run"/>
- </rel>
- <rel name="pre_transitions">
-  <ref class="FSMxTransition" id="pre_change_rate"/>
-  <ref class="FSMxTransition" id="pre_start_test"/>
- </rel>
- <rel name="post_transitions">
-  <ref class="FSMxTransition" id="post_start_test"/>
-  <ref class="FSMxTransition" id="post_drain_dataflow_test"/>
- </rel>
- <rel name="actions">
-  <ref class="FSMaction" id="user-provided-run-number"/>
-  <ref class="FSMaction" id="trigger-rate-specifier"/>
-  <ref class="FSMaction" id="file-logbook"/>
-  <ref class="FSMaction" id="file-run-registry"/>
  </rel>
 </obj>
 
 <obj class="FSMsequence" id="shutdown">
  <rel name="sequence">
-  <ref class="FSMCommand" id="disable_triggers"/>
-  <ref class="FSMCommand" id="drain_dataflow"/>
-  <ref class="FSMCommand" id="stop_trigger_sources"/>
-  <ref class="FSMCommand" id="stop"/>
-  <ref class="FSMCommand" id="scrap"/>
+  <ref class="FSMtransition" id="disable_triggers"/>
+  <ref class="FSMtransition" id="drain_dataflow"/>
+  <ref class="FSMtransition" id="stop_trigger_sources"/>
+  <ref class="FSMtransition" id="stop"/>
+  <ref class="FSMtransition" id="scrap"/>
  </rel>
 </obj>
 
@@ -303,113 +233,132 @@
 
 <obj class="FSMtransition" id="change_rate">
  <attr name="source" type="string" val="ready|running"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="conf">
  <attr name="source" type="string" val="initial"/>
  <attr name="dest" type="string" val="configured"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="disable_triggers">
  <attr name="source" type="string" val="running"/>
  <attr name="dest" type="string" val="ready"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="drain_dataflow">
  <attr name="source" type="string" val="ready"/>
  <attr name="dest" type="string" val="dataflow_drained"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="enable_triggers">
  <attr name="source" type="string" val="ready"/>
  <attr name="dest" type="string" val="running"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="-"/>
 </obj>
 
 <obj class="FSMtransition" id="scrap">
  <attr name="source" type="string" val="configured"/>
  <attr name="dest" type="string" val="initial"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="start">
  <attr name="source" type="string" val="configured"/>
  <attr name="dest" type="string" val="ready"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="-"/>
 </obj>
 
 <obj class="FSMtransition" id="stop">
  <attr name="source" type="string" val="trigger_sources_stopped"/>
  <attr name="dest" type="string" val="configured"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
 <obj class="FSMtransition" id="stop_trigger_sources">
  <attr name="source" type="string" val="dataflow_drained"/>
  <attr name="dest" type="string" val="trigger_sources_stopped"/>
+ <attr name="rcif_schema" type="string" val="/cvmfs/dunedaq.opensciencegrid.org/spack/releases/coredaq-v5.0.0-a9-1/spack-0.20.0/opt/spack/linux-almalinux9-x86_64/gcc-12.1.0/rcif-v1.2.3-635ds4lxamm5odd42vxnhnoonksqqttx/share/schema/rcif/cmd.jsonnet"/>
+ <attr name="n_retries" type="int" val="1"/>
 </obj>
 
-<obj class="FSMxTransition" id="post_drain_dataflow_prod">
- <attr name="transition" type="string" val="drain_dataflow"/>
- <attr name="order" type="string">
-  <data val="db-run-registry"/>
-  <data val="file-logbook"/>
-  <data val="elisa-logbook"/>
- </attr>
+<obj "PrePostFSMTransitions" id="post_drain_dataflow_prod">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="db-run-registry"/>
+    <ref class="RCApplicationAction" id="file-logbook"/>
+    <ref class="RCApplicationAction" id="elisa-logbook"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="post_drain_dataflow_test">
- <attr name="transition" type="string" val="drain_dataflow"/>
- <attr name="order" type="string">
-  <data val="file-logbook"/>
- </attr>
+<obj "PrePostFSMTransitions" id="post_drain_dataflow_prod">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="file-logbook"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="post_start_prod">
- <attr name="transition" type="string" val="start"/>
- <attr name="order" type="string">
-  <data val="file-logbook"/>
-  <data val="elisa-logbook"/>
- </attr>
- <attr name="mandatory" type="string">
-  <data val="elisa-logbook"/>
- </attr>
+<obj "PrePostFSMTransitions" id="post_start_prod">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="file-logbook"/>
+    <ref class="RCApplicationAction" id="elisa-logbook"/>
+ </rel>
+  <rel name="mandatory">
+    <ref class="RCApplicationAction" id="elisa-logbook"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="post_start_test">
- <attr name="transition" type="string" val="start"/>
- <attr name="order" type="string">
-  <data val="file-logbook"/>
- </attr>
+<obj "PrePostFSMTransitions" id="post_start_test">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="file-logbook"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="pre_change_rate">
- <attr name="transition" type="string" val="change_rate"/>
- <attr name="order" type="string">
-  <data val="trigger-rate-specifier"/>
- </attr>
- <attr name="mandatory" type="string">
-  <data val="trigger-rate-specifier"/>
- </attr>
+<obj "PrePostFSMTransitions" id="pre_change_rate">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="trigger-rate-specifier"/>
+ </rel>
+  <rel name="mandatory">
+    <ref class="RCApplicationAction" id="trigger-rate-specifier"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="pre_start_prod">
- <attr name="transition" type="string" val="start"/>
- <attr name="order" type="string">
-  <data val="usvc-provided-run-number"/>
-  <data val="db-run-registry"/>
- </attr>
- <attr name="mandatory" type="string">
-  <data val="usvc-provided-run-number"/>
-  <data val="db-run-registry"/>
- </attr>
+
+<obj "PrePostFSMTransitions" id="pre_start_prod">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="usvc-rate-specifier"/>
+    <ref class="RCApplicationAction" id="db-run-registry"/>
+ </rel>
+  <rel name="mandatory">
+    <ref class="RCApplicationAction" id="usvc-rate-specifier"/>
+    <ref class="RCApplicationAction" id="db-run-registry"/>
+ </rel>
 </obj>
 
-<obj class="FSMxTransition" id="pre_start_test">
- <attr name="transition" type="string" val="start"/>
- <attr name="order" type="string">
-  <data val="user-provided-run-number"/>
-  <data val="file-run-registry"/>
- </attr>
- <attr name="mandatory" type="string">
-  <data val="user-provided-run-number"/>
- </attr>
+<obj "PrePostFSMTransitions" id="pre_start_test">
+  <rel name="transition" class="FSMtransition" id="drain_dataflow"/>
+  <rel name="order">
+    <ref class="RCApplicationAction" id="user-provided-run-number"/>
+    <ref class="RCApplicationAction" id="db-run-registry"/>
+ </rel>
+  <rel name="mandatory">
+    <ref class="RCApplicationAction" id="user-provided-run-number"/>
+ </rel>
 </obj>
 
 <obj class="Variable" id="file-logbook-file-name">
