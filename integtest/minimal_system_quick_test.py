@@ -48,7 +48,7 @@ triggercandidate_frag_params = {
     "fragment_type": "Trigger_Candidate",
     "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": 1,
-    "min_size_bytes": 72,
+    "min_size_bytes": 128,
     "max_size_bytes": 216,
 }
 hsi_frag_params = {

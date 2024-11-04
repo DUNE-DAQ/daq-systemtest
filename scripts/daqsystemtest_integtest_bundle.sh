@@ -1,7 +1,7 @@
 #!/bin/bash
 # 10-Oct-2023, KAB
 
-integtest_list=( "minimal_system_quick_test.py" "readout_type_scan.py" "3ru_3df_multirun_test.py" "fake_data_producer_test.py" "long_window_readout_test.py" "3ru_1df_multirun_test.py" "tpstream_writing_test.py" )
+integtest_list=( "minimal_system_quick_test.py" "readout_type_scan.py" "3ru_3df_multirun_test.py" "small_footprint_quick_test.py" "fake_data_producer_test.py" "long_window_readout_test.py" "3ru_1df_multirun_test.py" "tpstream_writing_test.py" "example_system_test.py" )
 
 usage() {
     declare -r script_name=$(basename "$0")
@@ -100,7 +100,7 @@ while [[ ${overall_loop_count} -lt ${overall_run_count} ]]; do
         elif [[ -e "${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME}" ]]; then
           pytest -s ${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         else
-          pytest -s ${DAQSYSTEMTEST_SHARE}/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
+          pytest -s -p no:cacheprovider ${DAQSYSTEMTEST_SHARE}/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         fi
         let pytest_return_code=${PIPESTATUS[0]}
 
