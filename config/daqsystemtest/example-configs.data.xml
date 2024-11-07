@@ -79,7 +79,7 @@
  <comment creation-time="20240826T084126" created-by="maroda" created-on="np04-srv-015.cern.ch" author="maroda" text="Correct cern stream"/>
  <comment creation-time="20240909T081245" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="glehmann" text=" "/>
  <comment creation-time="20240909T082108" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="glehmann" text=" "/>
- <comment creation-time="20240918T124331" created-by="maroda" created-on="np04-srv-015.cern.ch" author="maroda" text="change local session opmon URI"/>
+ <comment creation-time="20240918T124331" created-by="maroda" created-on="np04-srv-015.cern.ch" author="maroda" text="change local system opmon URI"/>
 </comments>
 
 
@@ -100,7 +100,7 @@
  <rel name="controller" class="RCApplication" id="root-controller"/>
 </obj>
 
-<obj class="Session" id="ehn1-local-1x1-config">
+<obj class="System" id="ehn1-local-1x1-config">
  <attr name="data_request_timeout_ms" type="u32" val="1000"/>
  <attr name="data_rate_slowdown_factor" type="u32" val="1"/>
  <attr name="controller_log_level" type="enum" val="INFO"/>
@@ -119,7 +119,7 @@
  <rel name="opmon_uri" class="OpMonURI" id="cern-opmon-uri"/>
 </obj>
 
-<obj class="Session" id="ehn1-local-2x3-config">
+<obj class="System" id="ehn1-local-2x3-config">
  <attr name="data_request_timeout_ms" type="u32" val="1000"/>
  <attr name="data_rate_slowdown_factor" type="u32" val="1"/>
  <attr name="controller_log_level" type="enum" val="INFO"/>
@@ -133,7 +133,7 @@
  <rel name="opmon_uri" class="OpMonURI" id="cern-opmon-uri"/>
 </obj>
 
-<obj class="Session" id="local-1x1-config">
+<obj class="System" id="local-1x1-config">
  <attr name="data_request_timeout_ms" type="u32" val="1000"/>
  <attr name="data_rate_slowdown_factor" type="u32" val="1"/>
  <attr name="controller_log_level" type="enum" val="INFO"/>
@@ -158,7 +158,7 @@
  <rel name="opmon_uri" class="OpMonURI" id="local-opmon-uri"/>
 </obj>
 
-<obj class="Session" id="local-2x3-config">
+<obj class="System" id="local-2x3-config">
  <attr name="data_request_timeout_ms" type="u32" val="1000"/>
  <attr name="data_rate_slowdown_factor" type="u32" val="1"/>
  <attr name="controller_log_level" type="enum" val="INFO"/>

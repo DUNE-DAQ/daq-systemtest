@@ -97,7 +97,7 @@
  <rel name="controller" class="RCApplication" id="root-controller"/>
 </obj>
 
-<obj class="Session" id="test-hsi-session">
+<obj class="System" id="test-hsi-system">
  <attr name="data_request_timeout_ms" type="u32" val="1000"/>
  <attr name="data_rate_slowdown_factor" type="u32" val="1"/>
  <attr name="controller_log_level" type="enum" val="INFO"/>

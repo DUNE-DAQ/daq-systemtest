@@ -88,7 +88,7 @@
  <comment creation-time="20240301T164311" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="Unknown" text="activate TA"/>
  <comment creation-time="20240312T122552" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="Unknown" text="added information about services exposed by app; used to infer whether an app responds to data reuqests."/>
  <comment creation-time="20240325T124934" created-by="glehmann" created-on="np04-srv-019.cern.ch" author="Unknown" text="adjusted to name changes in connections"/>
- <comment creation-time="20240603T150525" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="glehmann" text="updated test session to new readout schema"/>
+ <comment creation-time="20240603T150525" created-by="glehmann" created-on="np04-srv-024.cern.ch" author="glehmann" text="updated test system to new readout schema"/>
  <comment creation-time="20240611T141410" created-by="thea" created-on="np04-srv-031.cern.ch" author="thea" text="readoutapp"/>
  <comment creation-time="20240611T172304" created-by="thea" created-on="np04-srv-031.cern.ch" author="thea" text="nic data reader"/>
  <comment creation-time="20240612T151554" created-by="thea" created-on="np04-srv-031.cern.ch" author="thea" text="tp source id updated"/>

@@ -73,16 +73,16 @@ common_config_obj.config_db = (
 )
 
 onebyone_local_conf = copy.deepcopy(common_config_obj)
-onebyone_local_conf.session = "local-1x1-config"
+onebyone_local_conf.system = "local-1x1-config"
 
 twobythree_local_conf = copy.deepcopy(common_config_obj)
-twobythree_local_conf.session = "local-2x3-config"
+twobythree_local_conf.system = "local-2x3-config"
 
 onebyone_ehn1_conf = copy.deepcopy(common_config_obj)
-onebyone_ehn1_conf.session = "ehn1-local-1x1-config"
+onebyone_ehn1_conf.system = "ehn1-local-1x1-config"
 
 twobythree_ehn1_conf = copy.deepcopy(common_config_obj)
-twobythree_ehn1_conf.session = "ehn1-local-2x3-config"
+twobythree_ehn1_conf.system = "ehn1-local-2x3-config"
 
 if "cern.ch" in hostname:
     confgen_arguments = {
@@ -113,7 +113,7 @@ def test_nanorc_success(run_nanorc):
 
     if "cern.ch" not in hostname and "EHN1" in current_test:
         pytest.skip(
-            f"This computer ({hostname}) is not at CERN, not running EHN1 sessions"
+            f"This computer ({hostname}) is not at CERN, not running EHN1 systems"
         )
 
     # Check that nanorc completed correctly
@@ -125,22 +125,22 @@ def test_log_files(run_nanorc):
 
     if "cern.ch" not in hostname and "EHN1" in current_test:
         pytest.skip(
-            f"This computer ({hostname}) is not at CERN, not running EHN1 sessions"
+            f"This computer ({hostname}) is not at CERN, not running EHN1 systems"
         )
 
     # Check that at least some of the expected log files are present
     assert any(
-        f"{run_nanorc.session}_df-01" in str(logname)
+        f"{run_nanorc.system}_df-01" in str(logname)
         for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_dfo" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_dfo" in str(logname) for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_mlt" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_mlt" in str(logname) for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_ru" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_ru" in str(logname) for logname in run_nanorc.log_files
     )
 
     if check_for_logfile_errors:
@@ -155,7 +155,7 @@ def test_data_files(run_nanorc):
 
     if "cern.ch" not in hostname and "EHN1" in current_test:
         pytest.skip(
-            f"This computer ({hostname}) is not at CERN, not running EHN1 sessions"
+            f"This computer ({hostname}) is not at CERN, not running EHN1 systems"
         )
 
     datafile_params = {

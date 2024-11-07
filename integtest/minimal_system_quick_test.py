@@ -84,7 +84,7 @@ object_databases = ["config/daqsystemtest/integrationtest-objects.data.xml"]
 conf_dict = data_classes.drunc_config()
 conf_dict.dro_map_config.n_streams = number_of_data_producers
 conf_dict.op_env = "integtest"
-conf_dict.session = "minimal"
+conf_dict.system = "minimal"
 conf_dict.tpg_enabled = False
 
 # For testing, allow drunc to manage ConnectivityService (default is False, integrationtest manages Connectivity Service)
@@ -131,17 +131,17 @@ def test_log_files(run_nanorc):
 
     # Check that at least some of the expected log files are present
     assert any(
-        f"{run_nanorc.session}_df-01" in str(logname)
+        f"{run_nanorc.system}_df-01" in str(logname)
         for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_dfo" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_dfo" in str(logname) for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_mlt" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_mlt" in str(logname) for logname in run_nanorc.log_files
     )
     assert any(
-        f"{run_nanorc.session}_ru" in str(logname) for logname in run_nanorc.log_files
+        f"{run_nanorc.system}_ru" in str(logname) for logname in run_nanorc.log_files
     )
 
     if check_for_logfile_errors:

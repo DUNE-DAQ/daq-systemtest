@@ -86,14 +86,14 @@ object_databases = ["config/daqsystemtest/integrationtest-objects.data.xml"]
 conf_dict = data_classes.drunc_config()
 conf_dict.dro_map_config.n_streams = number_of_data_producers
 conf_dict.op_env = "integtest"
-conf_dict.session = "smallfootprint"
+conf_dict.system = "smallfootprint"
 conf_dict.tpg_enabled = False
 conf_dict.fake_hsi_enabled = True
 
 conf_dict.config_substitutions.append(
     data_classes.config_substitution(
-        obj_id=conf_dict.session,
-        obj_class="Session",
+        obj_id=conf_dict.system,
+        obj_class="System",
         updates={"data_rate_slowdown_factor": data_rate_slowdown_factor},
     )
 )

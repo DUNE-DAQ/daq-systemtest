@@ -55,7 +55,7 @@ for cmd in commands:
     cmd_tokens = cmd.split()
     try:
         exe = getattr(sh, cmd_tokens[0])
-        exe(*cmd_tokens[1:], _out=sys.stdout, _err=sys.stderr,  _new_session=False)
+        exe(*cmd_tokens[1:], _out=sys.stdout, _err=sys.stderr,  _new_system=False)
     except Exception as e:
         failed[cmd] = str(e)
         failed.append(cmd)
