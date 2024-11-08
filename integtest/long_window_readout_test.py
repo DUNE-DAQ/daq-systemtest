@@ -161,14 +161,14 @@ confgen_arguments = {  # "No_TR_Splitting": conf_dict,
 if sufficient_disk_space and sufficient_resources_on_this_computer:
     nanorc_command_list = "boot conf".split()
     nanorc_command_list += (
-        "start --trigger-rate ".split()
+        "start --run-number --trigger-rate ".split()
         + [str(trigger_rate)]
         + "101 wait 15 enable-triggers wait ".split()
         + [str(run_duration)]
         + "disable-triggers wait 2 drain-dataflow wait 2 stop-trigger-sources stop wait 2".split()
     )
     nanorc_command_list += (
-        "start --trigger-rate ".split()
+        "start --run-number --trigger-rate ".split()
         + [str(trigger_rate)]
         + "102 wait 15 enable-triggers wait ".split()
         + [str(run_duration)]
