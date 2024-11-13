@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="64" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105549" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241018T200355"/>
+<info name="" type="" num-of-items="70" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105549" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241113T204513"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -80,11 +80,18 @@
  <rel name="associated_service" class="Service" id="dataRequests"/>
 </obj>
 
-<obj class="NetworkConnectionDescriptor" id="df-tokens">
- <attr name="uid_base" type="string" val="dataflow_token"/>
+<obj class="NetworkConnectionDescriptor" id="df-heartbeats">
+ <attr name="uid_base" type="string" val="dataflow_hb"/>
+ <attr name="connection_type" type="enum" val="kPubSub"/>
+ <attr name="data_type" type="string" val="DataflowHeartbeat"/>
+ <rel name="associated_service" class="Service" id="heartbeat"/>
+</obj>
+
+<obj class="NetworkConnectionDescriptor" id="dfo-decisions">
+ <attr name="uid_base" type="string" val="dfo_decision_"/>
  <attr name="connection_type" type="enum" val="kSendRecv"/>
- <attr name="data_type" type="string" val="TriggerDecisionToken"/>
- <rel name="associated_service" class="Service" id="dfTokens"/>
+ <attr name="data_type" type="string" val="DFODecision"/>
+ <rel name="associated_service" class="Service" id="dfoDecisions"/>
 </obj>
 
 <obj class="NetworkConnectionDescriptor" id="fragments">
@@ -165,9 +172,14 @@
  <rel name="descriptor" class="NetworkConnectionDescriptor" id="data-req-net-input"/>
 </obj>
 
-<obj class="NetworkConnectionRule" id="df-token-net-rule">
+<obj class="NetworkConnectionRule" id="df-hb-net-rule">
  <attr name="endpoint_class" type="class" val="DFOModule"/>
- <rel name="descriptor" class="NetworkConnectionDescriptor" id="df-tokens"/>
+ <rel name="descriptor" class="NetworkConnectionDescriptor" id="df-heartbeats"/>
+</obj>
+
+<obj class="NetworkConnectionRule" id="dfo-decision-net-rule">
+ <attr name="endpoint_class" type="class" val="DFOBrokerModule"/>
+ <rel name="descriptor" class="NetworkConnectionDescriptor" id="dfo-decisions"/>
 </obj>
 
 <obj class="NetworkConnectionRule" id="frag-net-rule">
@@ -275,9 +287,19 @@
  <rel name="descriptor" class="QueueDescriptor" id="tde-raw-input"/>
 </obj>
 
+<obj class="QueueConnectionRule" id="token-queue-rule">
+ <attr name="destination_class" type="class" val="DFOBrokerModule"/>
+ <rel name="descriptor" class="QueueDescriptor" id="token-input"/>
+</obj>
+
 <obj class="QueueConnectionRule" id="tp-queue-rule">
  <attr name="destination_class" type="class" val="TriggerDataHandlerModule"/>
  <rel name="descriptor" class="QueueDescriptor" id="tp-input"/>
+</obj>
+
+<obj class="QueueConnectionRule" id="trb-td-queue-rule">
+ <attr name="destination_class" type="class" val="TRBModule"/>
+ <rel name="descriptor" class="QueueDescriptor" id="td-input"/>
 </obj>
 
 <obj class="QueueConnectionRule" id="trigger-record-q-rule">
@@ -358,6 +380,13 @@
  <attr name="data_type" type="string" val="TDEEthFrame"/>
 </obj>
 
+<obj class="QueueDescriptor" id="token-input">
+ <attr name="uid_base" type="string" val="token_input_"/>
+ <attr name="queue_type" type="enum" val="kFollyMPMCQueue"/>
+ <attr name="capacity" type="u32" val="1000"/>
+ <attr name="data_type" type="string" val="TriggerDecisionToken"/>
+</obj>
+
 <obj class="QueueDescriptor" id="tp-input">
  <attr name="uid_base" type="string" val="tp_input_"/>
  <attr name="queue_type" type="enum" val="kFollyMPMCQueue"/>
@@ -410,7 +439,13 @@
  <attr name="eth_device_name" type="string" val="eno1"/>
 </obj>
 
-<obj class="Service" id="dfTokens">
+<obj class="Service" id="dfoDecisions">
+ <attr name="protocol" type="string" val="tcp"/>
+ <attr name="port" type="u16" val="0"/>
+ <attr name="eth_device_name" type="string" val="eno1"/>
+</obj>
+
+<obj class="Service" id="heartbeat">
  <attr name="protocol" type="string" val="tcp"/>
  <attr name="port" type="u16" val="0"/>
  <attr name="eth_device_name" type="string" val="eno1"/>
