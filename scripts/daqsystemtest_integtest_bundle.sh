@@ -98,7 +98,11 @@ while [[ ${overall_loop_count} -lt ${overall_run_count} ]]; do
         if [[ -e "./${TEST_NAME}" ]]; then
           pytest -s ./${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         elif [[ -e "${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME}" ]]; then
-          pytest -s ${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
+          if [[ -w "${DBT_AREA_ROOT}" ]]; then
+            pytest -s ${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
+          else
+            pytest -s -p no:cacheprovider ${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
+          fi
         else
           pytest -s -p no:cacheprovider ${DAQSYSTEMTEST_SHARE}/integtest/${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         fi
