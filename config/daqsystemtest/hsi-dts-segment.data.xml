@@ -72,6 +72,7 @@
  <file path="config/daqsystemtest/connections.data.xml"/>
  <file path="config/daqsystemtest/moduleconfs.data.xml"/>
  <file path="config/daqsystemtest/hosts.data.xml"/>
+ <file path="config/daqsystemtest/ccm.data.xml"/>
  <file path="schema/hsilibs/hsi.schema.xml"/>
 </include>
 
@@ -93,7 +94,7 @@
  <attr name="application_name" type="string" val="daq_application"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
-  <ref class="Service" id="hsi-dts-01_control"/>
+  <ref class="Service" id="daqapp_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="source_id" class="SourceIDConf" id="hsi-dts-srcid-01"/>
@@ -113,7 +114,7 @@
  <attr name="application_name" type="string" val="daq_application"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
-  <ref class="Service" id="dts-hsi-ctrl_control"/>
+  <ref class="Service" id="daqapp_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="modules">
@@ -152,7 +153,7 @@
  <rel name="exposes_service">
   <ref class="Service" id="dataRequests"/>
   <ref class="Service" id="HSIEvents"/>
-  <ref class="Service" id="hsi-dts-to-tc-app_control"/>
+  <ref class="Service" id="daqapp_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="source_id" class="SourceIDConf" id="hsi-dts-tc-srcid-1"/>
@@ -187,7 +188,7 @@
  <attr name="application_name" type="string" val="drunc-controller"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
-  <ref class="Service" id="hsi-dts-controller_control"/>
+  <ref class="Service" id="drunc_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="fsm" class="FSMconfiguration" id="FSMconfiguration_noAction"/>
@@ -209,26 +210,6 @@
   <ref class="DaqApplication" id="dts-hsi-ctrl"/>
  </rel>
  <rel name="controller" class="RCApplication" id="hsi-dts-controller"/>
-</obj>
-
-<obj class="Service" id="dts-hsi-ctrl_control">
- <attr name="protocol" type="string" val="rest"/>
- <attr name="port" type="u16" val="0"/>
-</obj>
-
-<obj class="Service" id="hsi-dts-01_control">
- <attr name="protocol" type="string" val="rest"/>
- <attr name="port" type="u16" val="0"/>
-</obj>
-
-<obj class="Service" id="hsi-dts-controller_control">
- <attr name="protocol" type="string" val="grpc"/>
- <attr name="port" type="u16" val="0"/>
-</obj>
-
-<obj class="Service" id="hsi-dts-to-tc-app_control">
- <attr name="protocol" type="string" val="rest"/>
- <attr name="port" type="u16" val="0"/>
 </obj>
 
 <obj class="SourceIDConf" id="hsi-dts-srcid-01">
