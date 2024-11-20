@@ -48,7 +48,7 @@ triggercandidate_frag_params = {
     "fragment_type": "Trigger_Candidate",
     "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": 1,
-    "min_size_bytes": 72,
+    "min_size_bytes": 128,
     "max_size_bytes": 216,
 }
 hsi_frag_params = {
@@ -114,7 +114,7 @@ conf_dict.config_substitutions.append(substitution)
 confgen_arguments = {"MinimalSystem": conf_dict}
 # The commands to run in nanorc, as a list
 nanorc_command_list = (
-    "boot conf start 101 wait 1 enable-triggers wait ".split()
+    "boot conf start --run-number 101 wait 1 enable-triggers wait ".split()
     + [str(run_duration)]
     + "disable-triggers wait 2 drain-dataflow wait 2 stop-trigger-sources stop scrap terminate".split()
 )

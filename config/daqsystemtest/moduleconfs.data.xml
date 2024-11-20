@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="60" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105629" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241023T204410"/>
+<info name="" type="" num-of-items="60" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105629" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20241105T173113"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -101,21 +101,6 @@
   <ref class="DaqModulesGroupByType" id="tp-handler-step"/>
   <ref class="DaqModulesGroupByType" id="aggregator-step"/>
  </rel>
-</obj>
-
-<obj class="CustomTCMakerConf" id="cstm-tc-generator">
- <attr name="timestamp_method" type="enum" val="kTimeSync"/>
- <attr name="latency_monitoring" type="bool" val="1"/>
- <attr name="template_for" type="class" val="CustomTCMaker"/>
- <attr name="trigger_types" type="u32">
-  <data val="3"/>
-  <data val="7"/>
- </attr>
- <attr name="trigger_intervals" type="u32">
-  <data val="62500000"/>
-  <data val="62500000"/>
- </attr>
- <attr name="clock_frequency_hz" type="u32" val="62500000"/>
 </obj>
 
 <obj class="DFOConf" id="dfoconf-01">
@@ -379,14 +364,14 @@
 <obj class="HSISignalWindow" id="def-hsi-dts-signal-window">
  <attr name="signal_type" type="u32" val="128"/>
  <attr name="tc_type_name" type="string" val="kTiming"/>
- <attr name="time_before" type="u32" val="10000"/>
+ <attr name="time_before" type="u32" val="3000"/>
  <attr name="time_after" type="u32" val="20000"/>
 </obj>
 
 <obj class="HSISignalWindow" id="def-hsi-signal-window">
  <attr name="signal_type" type="u32" val="1"/>
  <attr name="tc_type_name" type="string" val="kTiming"/>
- <attr name="time_before" type="u32" val="10000"/>
+ <attr name="time_before" type="u32" val="3000"/>
  <attr name="time_after" type="u32" val="20000"/>
 </obj>
 
@@ -401,9 +386,6 @@
 
 <obj class="MLTConf" id="def-mlt-conf">
  <attr name="template_for" type="class" val="MLTModule"/>
- <attr name="td_out_of_timeout" type="bool" val="1"/>
- <attr name="buffer_timeout" type="u32" val="1"/>
- <attr name="td_readout_limit" type="u32" val="1"/>
  <attr name="latency_monitoring" type="bool" val="1"/>
 </obj>
 
@@ -515,13 +497,11 @@
  <attr name="queue_sizes" type="u32" val="10000"/>
  <attr name="thread_names_prefix" type="string" val="mlt_"/>
  <attr name="latency_monitoring" type="bool" val="1"/>
- <attr name="hsi_trigger_type_passthrough" type="bool" val="0"/>
  <attr name="merge_overlapping_tcs" type="bool" val="1"/>
  <attr name="ignore_overlapping_tcs" type="bool" val="0"/>
  <attr name="td_out_of_timeout" type="bool" val="1"/>
  <attr name="buffer_timeout" type="u32" val="1"/>
- <attr name="td_readout_limit" type="u32" val="1"/>
- <attr name="use_bitwords" type="bool" val="0"/>
+ <attr name="td_readout_limit" type="u32" val="1000000"/>
  <rel name="tc_readout_map">
   <ref class="TCReadoutMap" id="def-tc-map"/>
   <ref class="TCReadoutMap" id="def-hsi-tc-map"/>
@@ -530,10 +510,12 @@
 
 <obj class="TCMakerADCSimpleWindowAlgorithm" id="tc-adcwindow-algo">
  <attr name="prescale" type="u32" val="100"/>
+ <attr name="tc_type_name" type="string" val="kADCSimpleWindow">
 </obj>
 
 <obj class="TCMakerPrescaleAlgorithm" id="tc-pass-through-algo">
  <attr name="prescale" type="u32" val="100"/>
+ <attr name="tc_type_name" type="string" val="kPrescale">
 </obj>
 
 <obj class="TCReadoutMap" id="def-hsi-tc-map">
