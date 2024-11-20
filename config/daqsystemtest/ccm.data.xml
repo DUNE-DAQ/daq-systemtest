@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="27" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="plasorak" last-modified-on="np04-srv-019.cern.ch" last-modification-time="20241119T172747"/>
+<info name="" type="" num-of-items="27" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20241120T175651"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -140,11 +140,6 @@
  <attr name="port" type="u16" val="0"/>
 </obj>
 
-<obj class="Service" id="rccontroller_control">
- <attr name="protocol" type="string" val="grpc"/>
- <attr name="port" type="u16" val="0"/>
-</obj>
-
 <obj class="Service" id="ehn1-connectivity-service">
  <attr name="protocol" type="string" val="http"/>
  <attr name="port" type="u16" val="30005"/>
@@ -153,6 +148,11 @@
 <obj class="Service" id="local-connectivity-service">
  <attr name="protocol" type="string" val="http"/>
  <attr name="port" type="u16" val="5000"/>
+</obj>
+
+<obj class="Service" id="rccontroller_control">
+ <attr name="protocol" type="string" val="grpc"/>
+ <attr name="port" type="u16" val="0"/>
 </obj>
 
 <obj class="Variable" id="ehn1-env-connectivity-port">
