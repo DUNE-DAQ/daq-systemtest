@@ -83,7 +83,7 @@
 
 <obj class="ActionPlan" id="readout-start">
  <attr name="execution_policy" type="enum" val="modules-in-parallel"/>
- <rel name="command" class="FSMtransition" id="start"/>
+ <rel name="command" class="FSMTransition" id="start"/>
  <rel name="steps">
   <ref class="DaqModulesGroupByType" id="aggregator-step"/>
   <ref class="DaqModulesGroupByType" id="tp-handler-step"/>
@@ -94,7 +94,7 @@
 
 <obj class="ActionPlan" id="readout-stop">
  <attr name="execution_policy" type="enum" val="modules-in-parallel"/>
- <rel name="command" class="FSMtransition" id="stop_trigger_sources"/>
+ <rel name="command" class="FSMTransition" id="stop_trigger_sources"/>
  <rel name="steps">
   <ref class="DaqModulesGroupByType" id="data-source-step"/>
   <ref class="DaqModulesGroupByType" id="dlh-step"/>

@@ -429,7 +429,7 @@
   <ref class="ReadoutApplication" id="ru-01"/>
   <ref class="ReadoutApplication" id="ru-02"/>
  </rel>
- <rel name="controller" class="RCApplication" id="ru-controller-no-action"/>
+ <rel name="controller" class="RCApplication" id="ru-controller"/>
 </obj>
 
 <obj class="Service" id="ru-01_control">
