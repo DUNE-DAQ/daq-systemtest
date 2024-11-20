@@ -129,7 +129,7 @@
  <attr name="application_name" type="string" val="drunc-controller"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
-  <ref class="Service" id="drunc_control"/>
+  <ref class="Service" id="rccontroller_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="fsm" class="FSMconfiguration" id="fsmConf-test"/>
@@ -140,7 +140,7 @@
  <attr name="port" type="u16" val="0"/>
 </obj>
 
-<obj class="Service" id="drunc_control">
+<obj class="Service" id="rccontroller_control">
  <attr name="protocol" type="string" val="grpc"/>
  <attr name="port" type="u16" val="0"/>
 </obj>
