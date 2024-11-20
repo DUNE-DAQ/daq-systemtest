@@ -132,7 +132,7 @@
   <ref class="Service" id="root-controller_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
- <rel name="fsm" class="FSMconfiguration" id="fsmConf-test"/>
+ <rel name="fsm" class="FSM" id="fsm-daq"/>
 </obj>
 
 <obj class="Service" id="ehn1-connectivity-service">

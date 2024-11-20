@@ -317,74 +317,15 @@
  <attr name="network_name" type="enum" val="Control"/>
 </obj>
 
-<obj class="RCApplication" id="ru-controller-no-action">
+<obj class="RCApplication" id="ru-controller">
  <attr name="application_name" type="string" val="drunc-controller"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="ru-controller_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
- <rel name="fsm" class="FSM" id="FSM_noAction"/>
- <rel name="pre_transitions">
-   <ref class="PrePostFSMTransitions" id="pre_change_rate"/>
-   <ref class="PrePostFSMTransitions" id="pre_start_prod"/>
- </rel>
- <rel name="post_transitions">
-   <ref class="PrePostFSMTransitions" id="post_start_prod"/>
-   <ref class="PrePostFSMTransitions" id="post_drain_dataflow_prod"/>
- </rel>
+ <rel name="fsm" class="FSM" id="fsm-daq"/>
 </obj>
-
-<obj class="RCApplication" id="ru-controller-prod">
- <attr name="application_name" type="string" val="drunc-controller"/>
- <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
- <rel name="exposes_service">
-  <ref class="Service" id="ru-controller_control"/>
- </rel>
- <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
- <rel name="fsm" class="FSM" id="fsmConf-prod"/>
- <rel name="pre_transitions">
-   <ref class="PrePostFSMTransitions" id="pre_change_rate"/>
-   <ref class="PrePostFSMTransitions" id="pre_start_prod"/>
- </rel>
- <rel name="post_transitions">
-   <ref class="PrePostFSMTransitions" id="post_start_prod"/>
-   <ref class="PrePostFSMTransitions" id="post_drain_dataflow_prod"/>
- </rel>
- <rel name="actions">
-  <ref class="RCApplicationAction" id="usvc-provided-run-number"/>
-  <ref class="RCApplicationAction" id="trigger-rate-specifier"/>
-  <ref class="RCApplicationAction" id="file-logbook"/>
-  <ref class="RCApplicationAction" id="elisa-logbook"/>
-  <ref class="RCApplicationAction" id="db-run-registry"/>
- </rel>
-</obj>
-
-<obj class="RCApplication" id="ru-controller-test">
- <attr name="application_name" type="string" val="drunc-controller"/>
- <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
- <rel name="exposes_service">
-  <ref class="Service" id="ru-controller_control"/>
- </rel>
- <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
- <rel name="fsm" class="FSM" id="fsmConf-prod"/>
- <rel name="pre_transitions">
-   <ref class="PrePostFSMTransitions" id="pre_change_rate"/>
-   <ref class="PrePostFSMTransitions" id="pre_start_prod"/>
- </rel>
- <rel name="post_transitions">
-   <ref class="PrePostFSMTransitions" id="post_start_prod"/>
-   <ref class="PrePostFSMTransitions" id="post_drain_dataflow_prod"/>
- </rel>
- <rel name="actions">
-  <ref class="RCApplicationAction" id="usvc-provided-run-number"/>
-  <ref class="RCApplicationAction" id="trigger-rate-specifier"/>
-  <ref class="RCApplicationAction" id="file-logbook"/>
-  <ref class="RCApplicationAction" id="elisa-logbook"/>
-  <ref class="RCApplicationAction" id="db-run-registry"/>
- </rel>
-</obj>
-
 
 <obj class="ReadoutApplication" id="ru-01">
  <attr name="application_name" type="string" val="daq_application"/>

@@ -117,7 +117,7 @@
   <ref class="Service" id="trg-controller_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
- <rel name="fsm" class="FSMconfiguration" id="FSMconfiguration_noAction"/>
+ <rel name="fsm" class="FSM" id="fsm-daq"/>
 </obj>
 
 <obj class="Segment" id="trg-segment">
