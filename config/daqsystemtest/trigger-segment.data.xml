@@ -160,6 +160,7 @@
 
 <obj class="TriggerApplication" id="tc-maker-1">
  <attr name="application_name" type="string" val="daq_application"/>
+ <attr name="tc_generation_enabled" type="bool" val="1"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="tc-maker-1_control"/>
