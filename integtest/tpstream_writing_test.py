@@ -25,58 +25,66 @@ check_for_logfile_errors = True
 expected_event_count = run_duration * pulser_trigger_rate / number_of_dataflow_apps
 expected_event_count_tolerance = expected_event_count / 10
 
-wibeth_frag_hsi_trig_params = {
+wibeth_frag_params = {
     "fragment_type_description": "WIBEth",
     "fragment_type": "WIBEth",
-    "hdf5_source_subsystem": "Detector_Readout",
     "expected_fragment_count": (number_of_data_producers * number_of_readout_apps),
     "min_size_bytes": 7272,
     "max_size_bytes": 14472,
-}
-wibeth_frag_multi_trig_params = {
-    "fragment_type_description": "WIBEth",
-    "fragment_type": "WIBEth",
-    "hdf5_source_subsystem": "Detector_Readout",
-    "expected_fragment_count": (number_of_data_producers * number_of_readout_apps),
-    "min_size_bytes": 7272,
-    "max_size_bytes": 14472,
+    "debug_mask": 0x0,
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 7272, "max_size_bytes":  7272},
+                                "kRandom": {"min_size_bytes": 7272, "max_size_bytes": 14472},
+                                "default": {"min_size_bytes": 7272, "max_size_bytes": 14472} }
 }
 wibeth_tpset_params = {
     "fragment_type_description": "TP Stream",
     "fragment_type": "Trigger_Primitive",
-    "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": number_of_readout_apps * 3,
+    "frag_counts_by_record_ordinal": {"first": {"min_count": 1, "max_count": number_of_readout_apps * 3},
+                                      "default": {"min_count": number_of_readout_apps * 3, "max_count": number_of_readout_apps * 3} },
     "min_size_bytes": 72,
-    "max_size_bytes": 3291080,
+    "max_size_bytes": 300000,
+    "debug_mask": 0x0,
+    "frag_sizes_by_record_ordinal": {  "first": {"min_size_bytes":    128, "max_size_bytes": 275000},
+                                      "second": {"min_size_bytes":    128, "max_size_bytes": 275000},
+                                        "last": {"min_size_bytes":    128, "max_size_bytes": 275000},
+                                     "default": {"min_size_bytes": 190000, "max_size_bytes": 275000} }
 }
 triggercandidate_frag_params = {
     "fragment_type_description": "Trigger Candidate",
     "fragment_type": "Trigger_Candidate",
-    "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": 1,
-    "min_size_bytes": 72,
-    "max_size_bytes": 280,
+    "min_size_bytes": 128,
+    "max_size_bytes": 208,
+    "debug_mask": 0x0,
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 208, "max_size_bytes": 208},
+                                "kRandom": {"min_size_bytes": 128, "max_size_bytes": 128},
+                                "default": {"min_size_bytes": 128, "max_size_bytes": 208} }
 }
 triggeractivity_frag_params = {
     "fragment_type_description": "Trigger Activity",
     "fragment_type": "Trigger_Activity",
-    "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": 1,
     "min_size_bytes": 72,
-    "max_size_bytes": 216,
+    "max_size_bytes": 360,
+    "debug_mask": 0x0,
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 216, "max_size_bytes": 360},
+                                "kRandom": {"min_size_bytes":  72, "max_size_bytes": 216},
+                                "default": {"min_size_bytes":  72, "max_size_bytes": 360} }
 }
-triggertp_frag_params = {
-    "fragment_type_description": "Trigger with TPs",
+triggerprimitive_frag_params = {
+    "fragment_type_description": "Trigger Primitive",
     "fragment_type": "Trigger_Primitive",
-    "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": number_of_readout_apps * 3,
     "min_size_bytes": 72,
-    "max_size_bytes": 16000,
+    "max_size_bytes": 184,
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes":  72, "max_size_bytes": 128},
+                                "kRandom": {"min_size_bytes":  72, "max_size_bytes": 184},
+                                "default": {"min_size_bytes":  72, "max_size_bytes": 184} }
 }
 hsi_frag_params = {
     "fragment_type_description": "HSI",
     "fragment_type": "Hardware_Signal",
-    "hdf5_source_subsystem": "HW_Signals_Interface",
     "expected_fragment_count": 0,
     "min_size_bytes": 72,
     "max_size_bytes": 100,
@@ -176,33 +184,23 @@ def test_data_files(run_nanorc):
     low_number_of_files = expected_number_of_data_files
     high_number_of_files = expected_number_of_data_files
     fragment_check_list = [triggercandidate_frag_params, hsi_frag_params]
-    if run_nanorc.confgen_config.tpg_enabled:
-        local_expected_event_count += (
-            250
-            * number_of_data_producers
-            * number_of_readout_apps
-            * run_duration
-            / (100 * number_of_dataflow_apps)
-        )
-        local_event_count_tolerance += (
-            10
-            * number_of_data_producers
-            * number_of_readout_apps
-            * run_duration
-            / (100 * number_of_dataflow_apps)
-        )
-        # fragment_check_list.append(wib1_frag_multi_trig_params) # ProtoWIB
-        # fragment_check_list.append(wib2_frag_multi_trig_params) # DuneWIB
-        fragment_check_list.append(wibeth_frag_multi_trig_params)  # WIBEth
-        fragment_check_list.append(triggertp_frag_params)
-        fragment_check_list.append(triggeractivity_frag_params)
-    else:
-        low_number_of_files -= number_of_dataflow_apps
-        if low_number_of_files < 1:
-            low_number_of_files = 1
-        # fragment_check_list.append(wib1_frag_hsi_trig_params) # ProtoWIB
-        # fragment_check_list.append(wib2_frag_hsi_trig_params) # DuneWIB
-        fragment_check_list.append(wibeth_frag_hsi_trig_params)  # WIBEth
+    local_expected_event_count += (
+        250
+        * number_of_data_producers
+        * number_of_readout_apps
+        * run_duration
+        / (100 * number_of_dataflow_apps)
+    )
+    local_event_count_tolerance += (
+        10
+        * number_of_data_producers
+        * number_of_readout_apps
+        * run_duration
+        / (100 * number_of_dataflow_apps)
+    )
+    fragment_check_list.append(wibeth_frag_params)
+    fragment_check_list.append(triggerprimitive_frag_params)
+    fragment_check_list.append(triggeractivity_frag_params)
 
     # Run some tests on the output data file
     assert (
