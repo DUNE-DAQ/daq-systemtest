@@ -42,7 +42,7 @@ ignored_logfile_problems = {
         "Worker with pid \\d+ was terminated due to signal",
         "Connection '.*' not found on the application registry",
     ],
-    "local-connection-server": [
+    "connectivity-service": [
         "errorlog: -",
         "Worker with pid \\d+ was terminated due to signal",
     ],
