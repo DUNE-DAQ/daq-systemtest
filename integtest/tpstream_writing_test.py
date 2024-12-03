@@ -32,7 +32,7 @@ wibeth_frag_params = {
     "min_size_bytes": 7272,
     "max_size_bytes": 14472,
     "debug_mask": 0x0,
-    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 7272, "max_size_bytes":  7272},
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 7272, "max_size_bytes": 14472},
                                 "kRandom": {"min_size_bytes": 7272, "max_size_bytes": 14472},
                                 "default": {"min_size_bytes": 7272, "max_size_bytes": 14472} }
 }
@@ -78,7 +78,7 @@ triggerprimitive_frag_params = {
     "expected_fragment_count": number_of_readout_apps * 3,
     "min_size_bytes": 72,
     "max_size_bytes": 184,
-    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes":  72, "max_size_bytes": 128},
+    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes":  72, "max_size_bytes": 184},
                                 "kRandom": {"min_size_bytes":  72, "max_size_bytes": 184},
                                 "default": {"min_size_bytes":  72, "max_size_bytes": 184} }
 }
@@ -137,6 +137,13 @@ conf_dict.config_substitutions.append(
         obj_class="TAMakerPrescaleAlgorithm",
         obj_id="dummy-ta-maker",
         updates={"prescale": 25},
+    )
+)
+conf_dict.config_substitutions.append(
+    data_classes.config_substitution(
+        obj_class="TCDataProcessor",
+        obj_id="def-tc-processor",
+        updates={"merge_overlapping_tcs": 0},
     )
 )
 
