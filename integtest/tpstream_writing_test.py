@@ -32,9 +32,6 @@ wibeth_frag_params = {
     "min_size_bytes": 7272,
     "max_size_bytes": 14472,
     "debug_mask": 0x0,
-    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes": 7272, "max_size_bytes": 14472},
-                                "kRandom": {"min_size_bytes": 7272, "max_size_bytes": 14472},
-                                "default": {"min_size_bytes": 7272, "max_size_bytes": 14472} }
 }
 wibeth_tpset_params = {
     "fragment_type_description": "TP Stream",
@@ -78,9 +75,6 @@ triggerprimitive_frag_params = {
     "expected_fragment_count": number_of_readout_apps * 3,
     "min_size_bytes": 72,
     "max_size_bytes": 184,
-    "frag_sizes_by_TC_type": {"kPrescale": {"min_size_bytes":  72, "max_size_bytes": 184},
-                                "kRandom": {"min_size_bytes":  72, "max_size_bytes": 184},
-                                "default": {"min_size_bytes":  72, "max_size_bytes": 184} }
 }
 hsi_frag_params = {
     "fragment_type_description": "HSI",
@@ -237,8 +231,6 @@ def test_tpstream_files(run_nanorc):
         run_duration + 8
     )  # TPStreamWriterModule is currently configured to write at 1 Hz, addl TimeSlices expected because of wait times in drunc command list
     local_event_count_tolerance = local_expected_event_count / 10
-    # fragment_check_list=[wib1_tpset_params] # ProtoWIB
-    # fragment_check_list=[wib2_tpset_params] # DuneWIB
     fragment_check_list = [wibeth_tpset_params]  # WIBEth
 
     assert len(tpstream_files) == 2  # one for each run
