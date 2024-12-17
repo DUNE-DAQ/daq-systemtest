@@ -551,4 +551,39 @@
  <attr name="trigger_record_timeout_ms" type="u32" val="2858"/>
 </obj>
 
+<obj class="DataHandlerConf" id="replay-tp-handler">
+ <attr name="template_for" type="class" val="TriggerDataHandlerModule"/>
+ <attr name="input_data_type" type="string" val="TriggerPrimitiveVector"/>
+ <attr name="generate_timesync" type="bool" val="0"/>
+ <rel name="request_handler" class="RequestHandler" id="def-tp-request-handler"/>
+ <rel name="latency_buffer" class="LatencyBuffer" id="def-latency-buf"/>
+ <rel name="data_processor" class="TPDataProcessor" id="replay-tp-processor"/>
+</obj>
+
+<obj class="TPDataProcessor" id="replay-tp-processor">
+ <attr name="queue_sizes" type="u32" val="10000"/>
+ <attr name="thread_names_prefix" type="string" val="proc-"/>
+ <attr name="latency_monitoring" type="bool" val="0"/>
+ <attr name="print_tp_info" type="bool" val="0"/>
+ <rel name="algorithms">
+  <ref class="TAMakerPrescaleAlgorithm" id="dummy-ta-maker"/>
+ </rel>
+</obj>
+
+<obj class="TPStreamConf" id="def-tp-streams">
+ <attr name="filename" type="string" val="/nfs/rscratch/mrigan/tp-test.hdf5"/>
+ <attr name="output_sink_name" type="string" val="replay_tps"/>
+</obj>
+
+<obj class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker">
+ <attr name="template_for" type="class" val="TriggerPrimitiveMakerModule"/>
+ <attr name="number_of_loops" type="u32" val="1"/>
+ <attr name="tpset_time_offset" type="u32" val="1"/>
+ <attr name="tpset_time_width" type="u32" val="1"/>
+ <attr name="maximum_wait_time_us" type="u32" val="1000"/>
+ <rel name="tp_streams">
+  <ref class="TPStreamConf" id="def-tp-streams"/>
+ </rel>
+</obj>
+
 </oks-data>

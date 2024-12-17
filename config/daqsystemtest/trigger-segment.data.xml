@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="10" oks-format="data" oks-version="862f2957270" created-by="asztuc" created-on="np04-srv-019.cern.ch" creation-time="20231212T171111" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20240917T153645"/>
+<info name="" type="" num-of-items="7" oks-format="data" oks-version="862f2957270" created-by="asztuc" created-on="np04-srv-019.cern.ch" creation-time="20231212T171111" last-modified-by="mrigan" last-modified-on="np04-srv-016.cern.ch" last-modification-time="20241216T215140"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -78,10 +78,12 @@
 
 <comments>
  <comment creation-time="20240208T095451" created-by="eflumerf" created-on="ironvirt9.mshome.net" author="eflumerf" text="reformat"/>
+ <comment creation-time="20241216T215140" created-by="mrigan" created-on="np04-srv-016.cern.ch" author="mrigan" text="qw"/>
 </comments>
 
 
 <obj class="MLTApplication" id="mlt">
+ <attr name="tx_generation_disabled" type="bool" val="0"/>
  <attr name="application_name" type="string" val="daq_application"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
@@ -106,9 +108,6 @@
  <rel name="data_subscriber" class="DataReaderConf" id="tc-subscriber-1"/>
  <rel name="trigger_inputs_handler" class="DataHandlerConf" id="def-tc-handler"/>
  <rel name="mlt_conf" class="MLTConf" id="def-mlt-conf"/>
- <rel name="standalone_candidate_maker_confs">
-  <ref class="RandomTCMakerConf" id="random-tc-generator"/>
- </rel>
 </obj>
 
 <obj class="RCApplication" id="trg-controller">
@@ -125,6 +124,7 @@
  <rel name="applications">
   <ref class="TriggerApplication" id="tc-maker-1"/>
   <ref class="MLTApplication" id="mlt"/>
+  <ref class="TriggerReplayApplication" id="replay"/>
  </rel>
  <rel name="controller" class="RCApplication" id="trg-controller"/>
 </obj>
@@ -141,6 +141,7 @@
 
 <obj class="TriggerApplication" id="tc-maker-1">
  <attr name="application_name" type="string" val="daq_application"/>
+ <attr name="tx_generation_disabled" type="bool" val="0"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="daqapp_control"/>
@@ -159,6 +160,28 @@
  </rel>
  <rel name="data_subscriber" class="DataReaderConf" id="ta-subscriber-1"/>
  <rel name="trigger_inputs_handler" class="DataHandlerConf" id="def-ta-handler"/>
+</obj>
+
+<obj class="TriggerReplayApplication" id="replay">
+ <attr name="application_name" type="string" val="daq_application"/>
+ <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
+ <rel name="exposes_service">
+  <ref class="Service" id="daqapp_control"/>
+  <ref class="Service" id="dataRequests"/>
+ </rel>
+ <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
+ <rel name="queue_rules">
+  <ref class="QueueConnectionRule" id="replay-tp-queue-rule"/>
+ </rel>
+ <rel name="network_rules">
+  <ref class="NetworkConnectionRule" id="replay-ta-net-rule"/>
+  <ref class="NetworkConnectionRule" id="data-req-trig-net-rule"/>
+ </rel>
+ <rel name="tp_source_ids">
+  <ref class="SourceIDConf" id="replay-tp-srcid-1"/>
+ </rel>
+ <rel name="tpmm_conf" class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker"/>
+ <rel name="tp_handler" class="DataHandlerConf" id="replay-tp-handler"/>
 </obj>
 
 </oks-data>
