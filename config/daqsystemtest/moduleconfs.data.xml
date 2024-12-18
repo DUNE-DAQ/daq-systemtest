@@ -570,9 +570,12 @@
  </rel>
 </obj>
 
-<obj class="TPStreamConf" id="def-tp-streams">
- <attr name="filename" type="string" val="/nfs/rscratch/mrigan/tp-test.hdf5"/>
- <attr name="output_sink_name" type="string" val="replay_tps"/>
+<obj class="TPStreamConf" id="def-tp-stream-1">
+ <attr name="filename" type="string" val="/nfs/rscratch/mrigan/swtest_tp_run032886_0000_tp-stream-writer-apa1_tpw_4_20241128T081856.hdf5"/>
+</obj>
+
+<obj class="TPStreamConf" id="def-tp-stream-2">
+ <attr name="filename" type="string" val="/nfs/rscratch/mrigan/swtest_tp_run032886_0000_tp-stream-writer-apa2_tpw_4_20241128T081856.hdf5"/>
 </obj>
 
 <obj class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker">
@@ -582,7 +585,8 @@
  <attr name="tpset_time_width" type="u32" val="1"/>
  <attr name="maximum_wait_time_us" type="u32" val="1000"/>
  <rel name="tp_streams">
-  <ref class="TPStreamConf" id="def-tp-streams"/>
+  <ref class="TPStreamConf" id="def-tp-stream-1"/>
+  <ref class="TPStreamConf" id="def-tp-stream-2"/>
  </rel>
 </obj>
 
