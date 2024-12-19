@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="26" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241023T204409"/>
+<info name="" type="" num-of-items="27" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20241120T175651"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -129,10 +129,15 @@
  <attr name="application_name" type="string" val="drunc-controller"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
-  <ref class="Service" id="root-controller_control"/>
+  <ref class="Service" id="rccontroller_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="fsm" class="FSMconfiguration" id="fsmConf-test"/>
+</obj>
+
+<obj class="Service" id="daqapp_control">
+ <attr name="protocol" type="string" val="rest"/>
+ <attr name="port" type="u16" val="0"/>
 </obj>
 
 <obj class="Service" id="ehn1-connectivity-service">
@@ -145,7 +150,7 @@
  <attr name="port" type="u16" val="5000"/>
 </obj>
 
-<obj class="Service" id="root-controller_control">
+<obj class="Service" id="rccontroller_control">
  <attr name="protocol" type="string" val="grpc"/>
  <attr name="port" type="u16" val="0"/>
 </obj>

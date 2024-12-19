@@ -103,21 +103,6 @@
  </rel>
 </obj>
 
-<obj class="CustomTCMakerConf" id="cstm-tc-generator">
- <attr name="timestamp_method" type="enum" val="kTimeSync"/>
- <attr name="latency_monitoring" type="bool" val="1"/>
- <attr name="template_for" type="class" val="CustomTCMaker"/>
- <attr name="trigger_types" type="u32">
-  <data val="3"/>
-  <data val="7"/>
- </attr>
- <attr name="trigger_intervals" type="u32">
-  <data val="62500000"/>
-  <data val="62500000"/>
- </attr>
- <attr name="clock_frequency_hz" type="u32" val="62500000"/>
-</obj>
-
 <obj class="DFOConf" id="dfoconf-01">
  <attr name="general_queue_timeout_ms" type="u32" val="100"/>
  <attr name="stop_timeout_ms" type="u32" val="100"/>
@@ -217,7 +202,7 @@
 
 <obj class="DataHandlerConf" id="def-tp-handler">
  <attr name="template_for" type="class" val="TriggerDataHandlerModule"/>
- <attr name="input_data_type" type="string" val="TriggerPrimitive"/>
+ <attr name="input_data_type" type="string" val="TriggerPrimitiveVector"/>
  <attr name="generate_timesync" type="bool" val="0"/>
  <rel name="request_handler" class="RequestHandler" id="def-tp-request-handler"/>
  <rel name="latency_buffer" class="LatencyBuffer" id="def-latency-buf"/>
