@@ -30,7 +30,7 @@ TEMP=`getopt -o hs:f:l:n:N: --long help,stop-on-failure -- "$@"`
 eval set -- "$TEMP"
 
 let first_test_index=0
-let last_test_index=999
+let last_test_index=${#integtest_list[@]}-1
 let individual_run_count=1
 let overall_run_count=1
 let stop_on_failure=0
@@ -83,17 +83,21 @@ fi
 TIMESTAMP=`date '+%Y%m%d%H%M%S'`
 mkdir -p /tmp/pytest-of-${USER}
 ITGRUNNER_LOG_FILE="/tmp/pytest-of-${USER}/daqsystemtest_integtest_bundle_${TIMESTAMP}.log"
+let total_number_of_tests=(1+${last_test_index}-${first_test_index})*${individual_run_count}*${overall_run_count}
 
 # run the tests
+let overall_test_index=0  # this is only used for user feedback
 let overall_loop_count=0
 while [[ ${overall_loop_count} -lt ${overall_run_count} ]]; do
-
   let test_index=0
   for TEST_NAME in ${integtest_list[@]}; do
     if [[ ${test_index} -ge ${first_test_index} && ${test_index} -le ${last_test_index} ]]; then
 
       let individual_loop_count=0
       while [[ ${individual_loop_count} -lt ${individual_run_count} ]]; do
+        let overall_test_index=${overall_test_index}+1
+        echo "Starting test ${overall_test_index} of ${total_number_of_tests}..."
+
         echo "===== Running ${TEST_NAME}" >> ${ITGRUNNER_LOG_FILE}
         if [[ -e "./${TEST_NAME}" ]]; then
           pytest -s ./${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
