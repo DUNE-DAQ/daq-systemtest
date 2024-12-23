@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="7" oks-format="data" oks-version="862f2957270" created-by="asztuc" created-on="np04-srv-019.cern.ch" creation-time="20231212T171111" last-modified-by="mrigan" last-modified-on="np04-srv-016.cern.ch" last-modification-time="20241216T215140"/>
+<info name="" type="" num-of-items="11" oks-format="data" oks-version="862f2957270" created-by="asztuc" created-on="np04-srv-019.cern.ch" creation-time="20231212T171111" last-modified-by="mrigan" last-modified-on="np04-srv-016.cern.ch" last-modification-time="20241220T181539"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -79,6 +79,7 @@
 <comments>
  <comment creation-time="20240208T095451" created-by="eflumerf" created-on="ironvirt9.mshome.net" author="eflumerf" text="reformat"/>
  <comment creation-time="20241216T215140" created-by="mrigan" created-on="np04-srv-016.cern.ch" author="mrigan" text="qw"/>
+ <comment creation-time="20241220T181539" created-by="mrigan" created-on="np04-srv-016.cern.ch" author="mrigan" text=" "/>
 </comments>
 
 
@@ -129,6 +130,26 @@
  <rel name="controller" class="RCApplication" id="trg-controller"/>
 </obj>
 
+<obj class="SourceIDConf" id="replay-tp-srcid-100000">
+ <attr name="sid" type="u32" val="100000"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100001">
+ <attr name="sid" type="u32" val="100001"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100002">
+ <attr name="sid" type="u32" val="100002"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100003">
+ <attr name="sid" type="u32" val="100003"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
 <obj class="SourceIDConf" id="ta-srcid-1">
  <attr name="sid" type="u32" val="1100"/>
  <attr name="subsystem" type="enum" val="Trigger"/>
@@ -168,6 +189,7 @@
  <rel name="exposes_service">
   <ref class="Service" id="daqapp_control"/>
   <ref class="Service" id="dataRequests"/>
+  <ref class="Service" id="triggerPrimitives"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
  <rel name="queue_rules">
@@ -178,7 +200,10 @@
   <ref class="NetworkConnectionRule" id="data-req-trig-net-rule"/>
  </rel>
  <rel name="tp_source_ids">
-  <ref class="SourceIDConf" id="replay-tp-srcid-1"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100000"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100001"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100002"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100003"/>
  </rel>
  <rel name="tpmm_conf" class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker"/>
  <rel name="tp_handler" class="DataHandlerConf" id="replay-tp-handler"/>
