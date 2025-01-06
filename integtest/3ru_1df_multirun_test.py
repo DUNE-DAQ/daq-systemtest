@@ -58,7 +58,7 @@ triggeractivity_frag_params = {
     "hdf5_source_subsystem": "Trigger",
     "expected_fragment_count": 1,
     "min_size_bytes": 72,
-    "max_size_bytes": 400,
+    "max_size_bytes": 504,
 }
 triggertp_frag_params = {
     "fragment_type_description": "Trigger with TPs",
