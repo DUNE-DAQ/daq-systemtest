@@ -96,9 +96,9 @@ while [[ ${overall_loop_count} -lt ${overall_run_count} ]]; do
       let individual_loop_count=0
       while [[ ${individual_loop_count} -lt ${individual_run_count} ]]; do
         let overall_test_index=${overall_test_index}+1
-        echo "Starting test ${overall_test_index} of ${total_number_of_tests}..."
+        echo "Starting test ${overall_test_index} of ${total_number_of_tests}..." | tee -a ${ITGRUNNER_LOG_FILE}
 
-        echo "===== Running ${TEST_NAME}" >> ${ITGRUNNER_LOG_FILE}
+        echo "===== Running ${TEST_NAME}" | tee -a ${ITGRUNNER_LOG_FILE}
         if [[ -e "./${TEST_NAME}" ]]; then
           pytest -s ./${TEST_NAME} | tee -a ${ITGRUNNER_LOG_FILE}
         elif [[ -e "${DBT_AREA_ROOT}/sourcecode/daqsystemtest/integtest/${TEST_NAME}" ]]; then
