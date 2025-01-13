@@ -414,6 +414,7 @@
   <ref class="AVXFrugalPedestalSubtractProcessor" id="tpg-pedsub-proc"/>
   <ref class="AVXThresholdProcessor" id="tpg-threshold-proc"/>
  </rel>
+ <rel name="tot_minima" class="TimeOverThresholdMinima" id="def-tot-minima"/>
 </obj>
 
 <obj class="RequestHandler" id="def-data-request-handler">
@@ -549,6 +550,12 @@
 <obj class="TRBConf" id="trb-01">
  <attr name="queues_timeout" type="u32" val="100"/>
  <attr name="trigger_record_timeout_ms" type="u32" val="2858"/>
+</obj>
+
+<obj class="TimeOverThresholdMinima" id="def-tot-minima">
+ <attr name="tot_minimum_plane0" type="u16" val="1"/>
+ <attr name="tot_minimum_plane1" type="u16" val="1"/>
+ <attr name="tot_minimum_plane2" type="u16" val="1"/>
 </obj>
 
 </oks-data>
