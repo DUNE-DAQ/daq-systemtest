@@ -145,6 +145,13 @@ conf_dict.config_substitutions.append(
         updates={"max_file_size": 4 * 1024 * 1024 * 1024},
     )
 )
+conf_dict.config_substitutions.append(
+    data_classes.config_substitution(
+        obj_class="DataStoreConf",
+        obj_id="default",
+        updates={"directory_path": output_path_parameter},
+    )
+)
 
 trsplit_conf = copy.deepcopy(conf_dict)
 trsplit_conf.config_substitutions.append(
