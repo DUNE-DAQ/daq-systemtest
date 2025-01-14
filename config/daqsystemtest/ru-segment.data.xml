@@ -188,17 +188,13 @@
 </obj>
 
 <obj class="DetectorToDaqConnection" id="conn_apa1">
- <rel name="contains">
-  <ref class="DPDKReceiver" id="ru-1-rcv"/>
-  <ref class="ResourceSetAND" id="apa1_sender_rset"/>
- </rel>
+ <rel name="receiver" class="DPDKReceiver" id="ru-1-rcv"/>
+ <rel name="senders" class="DetSenderSet" id="apa1_sender_rset"/>
 </obj>
 
 <obj class="DetectorToDaqConnection" id="conn_apa2">
- <rel name="contains">
-  <ref class="DPDKReceiver" id="ru-2-rcv"/>
-  <ref class="ResourceSetAND" id="apa2_sender_rset"/>
- </rel>
+ <rel name="receiver" class="DPDKReceiver" id="ru-2-rcv"/>
+ <rel name="senders" class="DetSenderSet" id="apa2_sender_rset"/>
 </obj>
 
 <obj class="GeoId" id="g_3_1_1_0">
@@ -258,7 +254,7 @@
 <obj class="HermesDataSender" id="wib_101_link0">
  <attr name="port" type="u32" val="17476"/>
  <attr name="control_host" type="string" val="localhost"/>
- <rel name="contains">
+ <rel name="streams">
   <ref class="DetectorStream" id="stream_100"/>
   <ref class="DetectorStream" id="stream_101"/>
   <ref class="DetectorStream" id="stream_102"/>
@@ -270,7 +266,7 @@
 <obj class="HermesDataSender" id="wib_201_link0">
  <attr name="port" type="u32" val="17476"/>
  <attr name="control_host" type="string" val="localhost"/>
- <rel name="contains">
+ <rel name="streams">
   <ref class="DetectorStream" id="stream_104"/>
   <ref class="DetectorStream" id="stream_105"/>
   <ref class="DetectorStream" id="stream_106"/>
@@ -409,14 +405,14 @@
  <rel name="data_reader" class="DPDKReaderConf" id="def-emu-nic-receiver-conf"/>
 </obj>
 
-<obj class="ResourceSetAND" id="apa1_sender_rset">
- <rel name="contains">
+<obj class="DetSenderSet" id="apa1_sender_rset">
+ <rel name="senders">
   <ref class="HermesDataSender" id="wib_101_link0"/>
  </rel>
 </obj>
 
-<obj class="ResourceSetAND" id="apa2_sender_rset">
- <rel name="contains">
+<obj class="DetSenderSet" id="apa2_sender_rset">
+ <rel name="senders">
   <ref class="HermesDataSender" id="wib_201_link0"/>
  </rel>
 </obj>
