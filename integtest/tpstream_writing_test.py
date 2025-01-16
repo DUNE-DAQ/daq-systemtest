@@ -140,6 +140,20 @@ conf_dict.config_substitutions.append(
         updates={"merge_overlapping_tcs": 0},
     )
 )
+conf_dict.config_substitutions.append(
+    data_classes.config_substitution(
+        obj_class="DataStoreConf",
+        obj_id="default",
+        updates={"directory_path": output_dir},
+    )
+)
+conf_dict.config_substitutions.append(
+    data_classes.config_substitution(
+        obj_class="DataStoreConf",
+        obj_id="default_tp_store_conf",
+        updates={"directory_path": output_dir},
+    )
+)
 
 confgen_arguments = {"Software_TPG_System": conf_dict}
 
