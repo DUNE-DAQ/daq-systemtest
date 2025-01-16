@@ -605,8 +605,6 @@
 <obj class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker">
  <attr name="template_for" type="class" val="TriggerPrimitiveMakerModule"/>
  <attr name="number_of_loops" type="u32" val="1"/>
- <attr name="tpset_time_offset" type="u32" val="1"/>
- <attr name="tpset_time_width" type="u32" val="1"/>
  <attr name="maximum_wait_time_us" type="u32" val="1000"/>
  <attr name="channel_map" type="string" val="PD2HDChannelMap"/>
  <rel name="filter_out_plane">
