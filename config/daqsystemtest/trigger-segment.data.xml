@@ -150,6 +150,46 @@
  <attr name="subsystem" type="enum" val="Trigger"/>
 </obj>
 
+<obj class="SourceIDConf" id="replay-tp-srcid-100004">
+ <attr name="sid" type="u32" val="100004"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100005">
+ <attr name="sid" type="u32" val="100005"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100006">
+ <attr name="sid" type="u32" val="100006"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100007">
+ <attr name="sid" type="u32" val="100007"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100008">
+ <attr name="sid" type="u32" val="100008"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100009">
+ <attr name="sid" type="u32" val="100009"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100010">
+ <attr name="sid" type="u32" val="100010"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
+<obj class="SourceIDConf" id="replay-tp-srcid-100011">
+ <attr name="sid" type="u32" val="100011"/>
+ <attr name="subsystem" type="enum" val="Trigger"/>
+</obj>
+
 <obj class="SourceIDConf" id="ta-srcid-1">
  <attr name="sid" type="u32" val="1100"/>
  <attr name="subsystem" type="enum" val="Trigger"/>
@@ -204,6 +244,14 @@
   <ref class="SourceIDConf" id="replay-tp-srcid-100001"/>
   <ref class="SourceIDConf" id="replay-tp-srcid-100002"/>
   <ref class="SourceIDConf" id="replay-tp-srcid-100003"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100004"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100005"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100006"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100007"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100008"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100009"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100010"/>
+  <ref class="SourceIDConf" id="replay-tp-srcid-100011"/>
  </rel>
  <rel name="tpmm_conf" class="TriggerPrimitiveMakerModuleConf" id="replay-tp-maker"/>
  <rel name="tp_handler" class="DataHandlerConf" id="replay-tp-handler"/>
