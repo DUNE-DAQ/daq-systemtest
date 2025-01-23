@@ -69,9 +69,7 @@ ignored_logfile_problems = {
     ],
     "connectivity-service": [
         "errorlog: -",
-        "Worker with pid \\d+ was terminated due to signal 1",
     ],
-    "log_.*_smallfootprint_": ["connect: Connection refused"],
 }
 
 # The next three variable declarations *must* be present as globals in the test
