@@ -60,9 +60,7 @@ ignored_logfile_problems = {
     ],
     "connectivity-service": [
         "errorlog: -",
-        "Worker with pid \\d+ was terminated due to signal 1",
     ],
-    "log_.*_longwindow_": ["connect: Connection refused"],
 }
 
 # Determine if the conditions are right for these tests
