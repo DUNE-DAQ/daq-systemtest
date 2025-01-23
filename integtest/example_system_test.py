@@ -58,6 +58,7 @@ ignored_logfile_problems = {
     "local-connection-server": [
         "errorlog: -",
         "Worker with pid \\d+ was terminated due to signal",
+        r"Worker \(pid:\d+\) was sent SIGHUP"
     ],
     "log_.*": ["connect: Connection refused"],
 }
