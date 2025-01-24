@@ -224,7 +224,6 @@
  <rel name="actions">
   <ref class="FSMaction" id="usvc-provided-run-number"/>
   <ref class="FSMaction" id="trigger-rate-specifier"/>
-  <ref class="FSMaction" id="file-logbook"/>
   <ref class="FSMaction" id="elisa-logbook"/>
   <ref class="FSMaction" id="db-run-registry"/>
  </rel>
@@ -349,7 +348,6 @@
  <attr name="transition" type="string" val="drain_dataflow"/>
  <attr name="order" type="string">
   <data val="db-run-registry"/>
-  <data val="file-logbook"/>
   <data val="elisa-logbook"/>
  </attr>
 </obj>
@@ -364,7 +362,6 @@
 <obj class="FSMxTransition" id="post_start_prod">
  <attr name="transition" type="string" val="start"/>
  <attr name="order" type="string">
-  <data val="file-logbook"/>
   <data val="elisa-logbook"/>
  </attr>
  <attr name="mandatory" type="string">
