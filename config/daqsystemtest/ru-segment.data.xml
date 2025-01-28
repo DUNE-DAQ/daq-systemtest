@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="46" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105615" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241023T204410"/>
+<info name="" type="" num-of-items="46" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105615" last-modified-by="gjc" last-modified-on="latitude" last-modification-time="20250127T174520"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -98,6 +98,7 @@
  <comment creation-time="20240822T070558" created-by="aoranday" created-on="np04-srv-031.cern.ch" author="aoranday" text="Add TPG SimpleThreshold."/>
  <comment creation-time="20240828T140226" created-by="aoranday" created-on="np04-srv-031.cern.ch" author="aoranday" text="Change AbsRS config."/>
  <comment creation-time="20240829T102857" created-by="aoranday" created-on="np04-srv-031.cern.ch" author="aoranday" text="Add AbsRS processor."/>
+ <comment creation-time="20250127T174152" created-by="gjc" created-on="latitude" author="gjc" text="New custom resource schema"/>
 </comments>
 
 
@@ -147,6 +148,18 @@
  <rel name="configuration" class="DPDKPortConfiguration" id="dpdk_e810_conf"/>
 </obj>
 
+<obj class="DetSenderSet" id="apa1_sender_rset">
+ <rel name="senders">
+  <ref class="HermesDataSender" id="wib_101_link0"/>
+ </rel>
+</obj>
+
+<obj class="DetSenderSet" id="apa2_sender_rset">
+ <rel name="senders">
+  <ref class="HermesDataSender" id="wib_201_link0"/>
+ </rel>
+</obj>
+
 <obj class="DetectorStream" id="stream_100">
  <attr name="source_id" type="u32" val="100"/>
  <rel name="geo_id" class="GeoId" id="g_3_1_1_0"/>
@@ -188,13 +201,13 @@
 </obj>
 
 <obj class="DetectorToDaqConnection" id="conn_apa1">
- <rel name="receiver" class="DPDKReceiver" id="ru-1-rcv"/>
  <rel name="senders" class="DetSenderSet" id="apa1_sender_rset"/>
+ <rel name="receiver" class="DPDKReceiver" id="ru-1-rcv"/>
 </obj>
 
 <obj class="DetectorToDaqConnection" id="conn_apa2">
- <rel name="receiver" class="DPDKReceiver" id="ru-2-rcv"/>
  <rel name="senders" class="DetSenderSet" id="apa2_sender_rset"/>
+ <rel name="receiver" class="DPDKReceiver" id="ru-2-rcv"/>
 </obj>
 
 <obj class="GeoId" id="g_3_1_1_0">
@@ -327,9 +340,6 @@
  <attr name="application_name" type="string" val="daq_application"/>
  <attr name="tp_generation_enabled" type="bool" val="1"/>
  <attr name="ta_generation_enabled" type="bool" val="1"/>
- <rel name="contains">
-  <ref class="DetectorToDaqConnection" id="conn_apa1"/>
- </rel>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="ru-01_control"/>
@@ -339,6 +349,10 @@
   <ref class="Service" id="triggerPrimitives"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
+ <rel name="action_plans">
+  <ref class="ActionPlan" id="readout-start"/>
+  <ref class="ActionPlan" id="readout-stop"/>
+ </rel>
  <rel name="queue_rules">
   <ref class="QueueConnectionRule" id="fa-queue-rule"/>
   <ref class="QueueConnectionRule" id="tp-queue-rule"/>
@@ -350,10 +364,6 @@
   <ref class="NetworkConnectionRule" id="ta-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-readout-net-rule"/>
   <ref class="NetworkConnectionRule" id="tpset-net-rule"/>
- </rel>
- <rel name="action_plans">
-  <ref class="ActionPlan" id="readout-start"/>
-  <ref class="ActionPlan" id="readout-stop"/>
  </rel>
  <rel name="tp_source_ids">
   <ref class="SourceIDConf" id="tp-srcid-1000"/>
@@ -364,20 +374,24 @@
  <rel name="link_handler" class="DataHandlerConf" id="def-link-handler"/>
  <rel name="tp_handler" class="DataHandlerConf" id="def-tp-handler"/>
  <rel name="data_reader" class="DPDKReaderConf" id="def-emu-nic-receiver-conf"/>
+ <rel name="daq_connections">
+  <ref class="DetectorToDaqConnection" id="conn_apa1"/>
+ </rel>
 </obj>
 
 <obj class="ReadoutApplication" id="ru-02">
  <attr name="application_name" type="string" val="daq_application"/>
  <attr name="tp_generation_enabled" type="bool" val="1"/>
  <attr name="ta_generation_enabled" type="bool" val="1"/>
- <rel name="contains">
-  <ref class="DetectorToDaqConnection" id="conn_apa2"/>
- </rel>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="ru-02_control"/>
  </rel>
  <rel name="opmon_conf" class="OpMonConf" id="slow-all-monitoring"/>
+ <rel name="action_plans">
+  <ref class="ActionPlan" id="readout-start"/>
+  <ref class="ActionPlan" id="readout-stop"/>
+ </rel>
  <rel name="queue_rules">
   <ref class="QueueConnectionRule" id="fa-queue-rule"/>
   <ref class="QueueConnectionRule" id="tp-queue-rule"/>
@@ -390,10 +404,6 @@
   <ref class="NetworkConnectionRule" id="data-req-readout-net-rule"/>
   <ref class="NetworkConnectionRule" id="tpset-net-rule"/>
  </rel>
- <rel name="action_plans">
-  <ref class="ActionPlan" id="readout-start"/>
-  <ref class="ActionPlan" id="readout-stop"/>
- </rel>
  <rel name="tp_source_ids">
   <ref class="SourceIDConf" id="tp-srcid-2000"/>
   <ref class="SourceIDConf" id="tp-srcid-2001"/>
@@ -403,17 +413,8 @@
  <rel name="link_handler" class="DataHandlerConf" id="def-link-handler"/>
  <rel name="tp_handler" class="DataHandlerConf" id="def-tp-handler"/>
  <rel name="data_reader" class="DPDKReaderConf" id="def-emu-nic-receiver-conf"/>
-</obj>
-
-<obj class="DetSenderSet" id="apa1_sender_rset">
- <rel name="senders">
-  <ref class="HermesDataSender" id="wib_101_link0"/>
- </rel>
-</obj>
-
-<obj class="DetSenderSet" id="apa2_sender_rset">
- <rel name="senders">
-  <ref class="HermesDataSender" id="wib_201_link0"/>
+ <rel name="daq_connections">
+  <ref class="DetectorToDaqConnection" id="conn_apa2"/>
  </rel>
 </obj>
 
