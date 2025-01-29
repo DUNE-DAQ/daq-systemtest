@@ -42,11 +42,9 @@ ignored_logfile_problems = {
         "Worker with pid \\d+ was terminated due to signal",
         "Connection '.*' not found on the application registry",
     ],
-    "local-connection-server": [
+    "connectivity-service": [
         "errorlog: -",
-        "Worker with pid \\d+ was terminated due to signal",
     ],
-    "log_.*_minimal_": ["connect: Connection refused"],
 }
 
 # The next three variable declarations *must* be present as globals in the test

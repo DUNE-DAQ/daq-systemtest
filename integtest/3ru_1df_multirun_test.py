@@ -81,11 +81,9 @@ ignored_logfile_problems = {
         "Worker with pid \\d+ was terminated due to signal 1",
         "Connection '.*' not found on the application registry",
     ],
-    "local-connection-server": [
+    "connectivity-service": [
         "errorlog: -",
-        "Worker with pid \\d+ was terminated due to signal 1",
     ],
-    "log_.*_3ru1df_": ["connect: Connection refused"],
 }
 
 # Determine if this computer is powerful enough for these tests
