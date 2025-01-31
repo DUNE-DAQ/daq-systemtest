@@ -130,6 +130,12 @@ conf_dict.config_substitutions.append(
         obj_class="LatencyBuffer", updates={"size": 200000}
     )
 )
+conf_dict.config_substitutions.append(
+    data_classes.config_substitution(
+        obj_class="DFOConf",
+        updates={"busy_threshold": 3, "free_threshold": 2}
+    )
+)
 
 swtpg_conf = copy.deepcopy(conf_dict)
 swtpg_conf.tpg_enabled = True
