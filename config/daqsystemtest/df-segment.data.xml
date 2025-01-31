@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="20" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105629" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241023T204409"/>
+<info name="" type="" num-of-items="21" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T105629" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20241115T170802"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -85,11 +85,13 @@
  <rel name="source_id" class="SourceIDConf" id="srcid-df-01"/>
  <rel name="queue_rules">
   <ref class="QueueConnectionRule" id="trigger-record-q-rule"/>
+  <ref class="QueueConnectionRule" id="token-queue-rule"/>
+  <ref class="QueueConnectionRule" id="trb-td-queue-rule"/>
  </rel>
  <rel name="network_rules">
-  <ref class="NetworkConnectionRule" id="td-trb-net-rule"/>
+  <ref class="NetworkConnectionRule" id="dfo-decision-net-rule"/>
   <ref class="NetworkConnectionRule" id="frag-net-rule"/>
-  <ref class="NetworkConnectionRule" id="df-token-net-rule"/>
+  <ref class="NetworkConnectionRule" id="df-hb-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-hsi-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-readout-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-trig-net-rule"/>
@@ -98,6 +100,7 @@
  <rel name="data_writers">
   <ref class="DataWriterConf" id="dw-01"/>
  </rel>
+ <rel name="broker" class="DFOBrokerConf" id="dfobroker-01"/>
  <rel name="uses" class="DFHWConf" id="dfhw-01"/>
 </obj>
 
@@ -111,11 +114,13 @@
  <rel name="source_id" class="SourceIDConf" id="srcid-df-02"/>
  <rel name="queue_rules">
   <ref class="QueueConnectionRule" id="trigger-record-q-rule"/>
+  <ref class="QueueConnectionRule" id="token-queue-rule"/>
+  <ref class="QueueConnectionRule" id="trb-td-queue-rule"/>
  </rel>
  <rel name="network_rules">
-  <ref class="NetworkConnectionRule" id="td-trb-net-rule"/>
+  <ref class="NetworkConnectionRule" id="dfo-decision-net-rule"/>
   <ref class="NetworkConnectionRule" id="frag-net-rule"/>
-  <ref class="NetworkConnectionRule" id="df-token-net-rule"/>
+  <ref class="NetworkConnectionRule" id="df-hb-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-hsi-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-readout-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-trig-net-rule"/>
@@ -124,6 +129,7 @@
  <rel name="data_writers">
   <ref class="DataWriterConf" id="dw-01"/>
  </rel>
+ <rel name="broker" class="DFOBrokerConf" id="dfobroker-01"/>
  <rel name="uses" class="DFHWConf" id="dfhw-01"/>
 </obj>
 
@@ -137,11 +143,13 @@
  <rel name="source_id" class="SourceIDConf" id="srcid-df-03"/>
  <rel name="queue_rules">
   <ref class="QueueConnectionRule" id="trigger-record-q-rule"/>
+  <ref class="QueueConnectionRule" id="token-queue-rule"/>
+  <ref class="QueueConnectionRule" id="trb-td-queue-rule"/>
  </rel>
  <rel name="network_rules">
-  <ref class="NetworkConnectionRule" id="td-trb-net-rule"/>
+  <ref class="NetworkConnectionRule" id="dfo-decision-net-rule"/>
   <ref class="NetworkConnectionRule" id="frag-net-rule"/>
-  <ref class="NetworkConnectionRule" id="df-token-net-rule"/>
+  <ref class="NetworkConnectionRule" id="df-hb-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-hsi-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-readout-net-rule"/>
   <ref class="NetworkConnectionRule" id="data-req-trig-net-rule"/>
@@ -150,6 +158,7 @@
  <rel name="data_writers">
   <ref class="DataWriterConf" id="dw-01"/>
  </rel>
+ <rel name="broker" class="DFOBrokerConf" id="dfobroker-01"/>
  <rel name="uses" class="DFHWConf" id="dfhw-01"/>
 </obj>
 
@@ -169,9 +178,16 @@
  <rel name="network_rules">
   <ref class="NetworkConnectionRule" id="td-dfo-net-rule"/>
   <ref class="NetworkConnectionRule" id="ti-net-rule"/>
-  <ref class="NetworkConnectionRule" id="df-token-net-rule"/>
  </rel>
  <rel name="dfo" class="DFOConf" id="dfoconf-01"/>
+</obj>
+
+<obj class="DFOBrokerConf" id="dfobroker-01">
+ <attr name="send_heartbeat_interval_ms" type="u32" val="1000"/>
+ <attr name="send_heartbeat_timeout_ms" type="u32" val="1000"/>
+ <attr name="td_timeout_ms" type="u32" val="1000"/>
+ <attr name="stop_timeout_ms" type="u32" val="5000"/>
+ <rel name="initial_active_dfo" class="DFOApplication" id="dfo-01"/>
 </obj>
 
 <obj class="RCApplication" id="df-controller">
