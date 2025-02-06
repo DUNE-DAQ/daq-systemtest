@@ -63,7 +63,7 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="43" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20241023T204410"/>
+<info name="" type="" num-of-items="46" oks-format="data" oks-version="862f2957270" created-by="gjc" created-on="thinkpad" creation-time="20231207T110859" last-modified-by="eflumerf" last-modified-on="ironvirt9.IRONDOMAIN.local" last-modification-time="20250130T204455"/>
 
 <include>
  <file path="schema/confmodel/dunedaq.schema.xml"/>
@@ -125,6 +125,10 @@
  </rel>
 </obj>
 
+<obj class="FSMaction" id="enable-dfo">
+ <attr name="name" type="string" val="enable-dfo"/>
+</obj>
+
 <obj class="FSMaction" id="file-logbook">
  <attr name="name" type="string" val="file-logbook"/>
  <rel name="parameters">
@@ -180,6 +184,7 @@
   <ref class="FSMtransition" id="stop"/>
   <ref class="FSMtransition" id="scrap"/>
   <ref class="FSMtransition" id="change_rate"/>
+  <ref class="FSMtransition" id="enable_dfo"/>
  </rel>
  <rel name="command_sequences">
   <ref class="FSMsequence" id="shutdown"/>
@@ -210,6 +215,7 @@
   <ref class="FSMtransition" id="stop"/>
   <ref class="FSMtransition" id="scrap"/>
   <ref class="FSMtransition" id="change_rate"/>
+  <ref class="FSMtransition" id="enable_dfo"/>
  </rel>
  <rel name="command_sequences">
   <ref class="FSMsequence" id="shutdown"/>
@@ -217,6 +223,7 @@
   <ref class="FSMsequence" id="stop_run"/>
  </rel>
  <rel name="pre_transitions">
+  <ref class="FSMxTransition" id="pre_enable_dfo"/>
   <ref class="FSMxTransition" id="pre_change_rate"/>
   <ref class="FSMxTransition" id="pre_start_prod"/>
  </rel>
@@ -227,6 +234,7 @@
  <rel name="actions">
   <ref class="FSMaction" id="usvc-provided-run-number"/>
   <ref class="FSMaction" id="trigger-rate-specifier"/>
+  <ref class="FSMaction" id="enable-dfo"/>
   <ref class="FSMaction" id="elisa-logbook"/>
   <ref class="FSMaction" id="db-run-registry"/>
  </rel>
@@ -254,6 +262,7 @@
   <ref class="FSMtransition" id="stop"/>
   <ref class="FSMtransition" id="scrap"/>
   <ref class="FSMtransition" id="change_rate"/>
+  <ref class="FSMtransition" id="enable_dfo"/>
  </rel>
  <rel name="command_sequences">
   <ref class="FSMsequence" id="shutdown"/>
@@ -262,6 +271,7 @@
  </rel>
  <rel name="pre_transitions">
   <ref class="FSMxTransition" id="pre_change_rate"/>
+  <ref class="FSMxTransition" id="pre_enable_dfo"/>
   <ref class="FSMxTransition" id="pre_start_test"/>
  </rel>
  <rel name="post_transitions">
@@ -271,6 +281,7 @@
  <rel name="actions">
   <ref class="FSMaction" id="user-provided-run-number"/>
   <ref class="FSMaction" id="trigger-rate-specifier"/>
+  <ref class="FSMaction" id="enable-dfo"/>
   <ref class="FSMaction" id="file-logbook"/>
   <ref class="FSMaction" id="file-run-registry"/>
  </rel>
@@ -320,6 +331,10 @@
 <obj class="FSMtransition" id="drain_dataflow">
  <attr name="source" type="string" val="ready"/>
  <attr name="dest" type="string" val="dataflow_drained"/>
+</obj>
+
+<obj class="FSMtransition" id="enable_dfo">
+ <attr name="source" type="string" val="ready|running"/>
 </obj>
 
 <obj class="FSMtransition" id="enable_triggers">
@@ -386,6 +401,16 @@
  </attr>
  <attr name="mandatory" type="string">
   <data val="trigger-rate-specifier"/>
+ </attr>
+</obj>
+
+<obj class="FSMxTransition" id="pre_enable_dfo">
+ <attr name="transition" type="string" val="enable_dfo"/>
+ <attr name="order" type="string">
+  <data val="enable-dfo"/>
+ </attr>
+ <attr name="mandatory" type="string">
+  <data val="enable-dfo"/>
  </attr>
 </obj>
 
