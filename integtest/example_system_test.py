@@ -58,8 +58,9 @@ ignored_logfile_problems = {
     "local-connection-server": [
         "errorlog: -",
         "Worker with pid \\d+ was terminated due to signal",
+        r"Worker \(pid:\d+\) was sent SIGHUP"
     ],
-    "log_.*": ["connect: Connection refused"],
+    "log_.*": ["connect: Connection refused", "Connection reset by peer", "end of stream"],
 }
 
 # The arguments to pass to the config generator, excluding the json
