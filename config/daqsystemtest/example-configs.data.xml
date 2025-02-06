@@ -184,11 +184,7 @@
  <attr name="controller_log_level" type="enum" val="INFO"/>
  <rel name="connectivity_service" class="ConnectivityService" id="local-connectivity-service-config"/>
  <rel name="environment">
-  <ref class="Variable" id="local-env-ers-verb"/>
-  <ref class="Variable" id="local-env-ers-info"/>
-  <ref class="Variable" id="local-env-ers-warning"/>
-  <ref class="Variable" id="local-env-ers-error"/>
-  <ref class="Variable" id="local-env-ers-fatal"/>
+  <ref class="VariableSet" id="ehn1-variables"/>
  </rel>
  <rel name="disabled">
   <ref class="DFApplication" id="df-02"/>
