@@ -83,7 +83,6 @@
 
 
 <obj class="MLTApplication" id="mlt">
- <attr name="tx_generation_disabled" type="bool" val="0"/>
  <attr name="application_name" type="string" val="daq_application"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
@@ -108,6 +107,9 @@
  <rel name="data_subscriber" class="DataReaderConf" id="tc-subscriber-1"/>
  <rel name="trigger_inputs_handler" class="DataHandlerConf" id="def-tc-handler"/>
  <rel name="mlt_conf" class="MLTConf" id="def-mlt-conf"/>
+ <rel name="standalone_candidate_maker_confs">
+  <ref class="RandomTCMakerConf" id="random-tc-generator"/>
+ </rel>
 </obj>
 
 <obj class="RCApplication" id="trg-controller">
@@ -201,7 +203,6 @@
 
 <obj class="TriggerApplication" id="tc-maker-1">
  <attr name="application_name" type="string" val="daq_application"/>
- <attr name="tx_generation_disabled" type="bool" val="0"/>
  <rel name="runs_on" class="VirtualHost" id="vlocalhost"/>
  <rel name="exposes_service">
   <ref class="Service" id="daqapp_control"/>
