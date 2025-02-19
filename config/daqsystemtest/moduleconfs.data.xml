@@ -72,6 +72,7 @@
  <file path="schema/appmodel/fdmodules.schema.xml"/>
  <file path="config/daqsystemtest/connections.data.xml"/>
  <file path="config/daqsystemtest/fsm.data.xml"/>
+ <file path="config/daqsystemtest/ccm.data.xml"/>
 </include>
 
 <comments>
@@ -582,7 +583,7 @@
 </obj>
 
 <obj class="TPStreamConf" id="def-tp-stream-1">
- <attr name="filename" type="string" val="/nfs/rscratch/mrigan/swtest_tp_run032886_0000_tp-stream-writer-apa1_tpw_4_20241128T081856.hdf5"/>
+ <attr name="filename" type="string" val=""/>
 </obj>
 
 <obj class="TRBConf" id="trb-01">
@@ -594,10 +595,10 @@
  <attr name="template_for" type="class" val="TriggerPrimitiveMakerModule"/>
  <attr name="number_of_loops" type="u32" val="1"/>
  <attr name="maximum_wait_time_us" type="u32" val="1000"/>
+ <attr name="total_planes" type="u32" val="1"/>
  <attr name="channel_map" type="string" val="PD2HDChannelMap"/>
  <rel name="filter_out_plane">
   <ref class="PlaneNumberConf" id="def-plane-filter-1"/>
-  <ref class="PlaneNumberConf" id="def-plane-filter-2"/>
  </rel>
  <rel name="tp_streams">
   <ref class="TPStreamConf" id="def-tp-stream-1"/>
