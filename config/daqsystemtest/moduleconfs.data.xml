@@ -584,6 +584,7 @@
 
 <obj class="TPStreamConf" id="def-tp-stream-1">
  <attr name="filename" type="string" val=""/>
+ <attr name="index" type="u32" val="0"/>
 </obj>
 
 <obj class="TRBConf" id="trb-01">
